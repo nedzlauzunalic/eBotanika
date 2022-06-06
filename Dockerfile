@@ -1,13 +1,14 @@
 FROM mcr.microsoft.com/dotnet/sdk:6.0-focal AS build
-WORKDIR /source
+WORKDIR /src
 COPY . .
-RUN dotnet restore "./eBotanika.API/eBotanika.API.csproj" --disable-parallel
-RUN dotnet publish "./eBotanika.API/eBotanika.API.csproj" -c release -o /app --no-restore
 
-FROM mcr.microsoft.com/dotnet/aspnet:6.0-focal
+FROM mcr.microsoft.com/dotnet/aspnet:6.0-focal AS base
 WORKDIR /app
-COPY --from=build /app ./
 
-EXPOSE 5000
+FROM build AS publish
+RUN dotnet publish "eBotanika.API" -c Release -o /app
+FROM base AS final
+WORKDIR /app
+COPY --from=publish /app .
 
 ENTRYPOINT ["dotnet", "eBotanika.API.dll"]
