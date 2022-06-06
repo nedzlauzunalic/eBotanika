@@ -1,0 +1,6 @@
+Desktop app
+Korisnicko ime: desktop
+Lozinka: test
+Mobile app
+Korisnicko ime: mobile
+Lozinka: test
