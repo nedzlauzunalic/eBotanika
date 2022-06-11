@@ -34,6 +34,7 @@ namespace eBotanika.WinUI.Rezervacije
             this.label1 = new System.Windows.Forms.Label();
             this.dgvRezervacije = new System.Windows.Forms.DataGridView();
             this.DatumRezervacije = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.AdresaDostave = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.KorisnikID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.GradID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Napomena = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -60,6 +61,7 @@ namespace eBotanika.WinUI.Rezervacije
             this.dgvRezervacije.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvRezervacije.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.DatumRezervacije,
+            this.AdresaDostave,
             this.KorisnikID,
             this.GradID,
             this.Napomena,
@@ -78,6 +80,12 @@ namespace eBotanika.WinUI.Rezervacije
             this.DatumRezervacije.DataPropertyName = "DatumRezervacije";
             this.DatumRezervacije.HeaderText = "Datum rezervacije";
             this.DatumRezervacije.Name = "DatumRezervacije";
+            // 
+            // AdresaDostave
+            // 
+            this.AdresaDostave.DataPropertyName = "AdresaDostave";
+            this.AdresaDostave.HeaderText = "Adresa dostave";
+            this.AdresaDostave.Name = "AdresaDostave";
             // 
             // KorisnikID
             // 
@@ -135,6 +143,7 @@ namespace eBotanika.WinUI.Rezervacije
         private Label label1;
         private DataGridView dgvRezervacije;
         private DataGridViewTextBoxColumn DatumRezervacije;
+        private DataGridViewTextBoxColumn AdresaDostave;
         private DataGridViewTextBoxColumn KorisnikID;
         private DataGridViewTextBoxColumn GradID;
         private DataGridViewTextBoxColumn Napomena;

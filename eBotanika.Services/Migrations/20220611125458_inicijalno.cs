@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace eBotanika.Services.Migrations
 {
-    public partial class creatingDb : Migration
+    public partial class inicijalno : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -207,6 +207,7 @@ namespace eBotanika.Services.Migrations
                     Napomena = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Kolicina = table.Column<int>(type: "int", nullable: false),
                     SvrhaID = table.Column<int>(type: "int", nullable: false),
+                    AdresaDostave = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     BiljkeID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -284,8 +285,8 @@ namespace eBotanika.Services.Migrations
                 columns: new[] { "KorisnikID", "DatumRodjenja", "Email", "Ime", "KorisnickoIme", "LozinkaHash", "LozinkaSalt", "Prezime", "Telefon" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2022, 6, 6, 11, 38, 12, 327, DateTimeKind.Local).AddTicks(9078), "korisnik@live.com", "Mobile", "mobile", "bUBHhasx3aUpr7cmjozMzIeL35c=", "zthomrUyhZjeapvj5KYL+A==", "Mobile", "+38762345678" },
-                    { 2, new DateTime(2022, 6, 6, 11, 38, 12, 327, DateTimeKind.Local).AddTicks(9140), "adnan@live.com", "Adnan", "adnan", "bUBHhasx3aUpr7cmjozMzIeL35c=", "zthomrUyhZjeapvj5KYL+A==", "Pobric", "+38762345676" }
+                    { 1, new DateTime(2022, 6, 11, 14, 54, 57, 697, DateTimeKind.Local).AddTicks(3456), "korisnik@live.com", "Mobile", "mobile", "bUBHhasx3aUpr7cmjozMzIeL35c=", "zthomrUyhZjeapvj5KYL+A==", "Mobile", "+38762345678" },
+                    { 2, new DateTime(2022, 6, 11, 14, 54, 57, 697, DateTimeKind.Local).AddTicks(3531), "adnan@live.com", "Adnan", "adnan", "bUBHhasx3aUpr7cmjozMzIeL35c=", "zthomrUyhZjeapvj5KYL+A==", "Pobric", "+38762345676" }
                 });
 
             migrationBuilder.InsertData(
@@ -329,6 +330,15 @@ namespace eBotanika.Services.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "Placanje",
+                columns: new[] { "PlacanjeID", "BrojKartice", "ExpMonth", "ExpYear", "KorisnikID", "SecurityCode" },
+                values: new object[,]
+                {
+                    { 1, 123445677, 2, 23, 1, 123 },
+                    { 2, 987654678, 7, 25, 2, 134 }
+                });
+
+            migrationBuilder.InsertData(
                 table: "UposlenikUloge",
                 columns: new[] { "UposlenikUlogeID", "DatumIzmjene", "UlogaID", "UposlenikID" },
                 values: new object[,]
@@ -338,14 +348,25 @@ namespace eBotanika.Services.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Rezervacije",
-                columns: new[] { "RezervacijaID", "BiljkeID", "DatumRezervacije", "GradID", "Kolicina", "KorisnikID", "Napomena", "SvrhaID" },
+                table: "Ocjena",
+                columns: new[] { "OcjenaID", "BiljkeID", "KorisnikID", "OcjenaUsluge" },
                 values: new object[,]
                 {
-                    { 1, 1, new DateTime(2022, 5, 6, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 2, 1, "", 1 },
-                    { 2, 2, new DateTime(2022, 4, 6, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, 1, 2, "Dostava na adresu", 2 },
-                    { 3, 3, new DateTime(2022, 4, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 3, 1, "Placanje pri preuzimanju", 1 },
-                    { 4, 4, new DateTime(2022, 5, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, 4, 2, "Placanje pri preuzimanju", 3 }
+                    { 1, 1, 1, 4m },
+                    { 2, 2, 1, 5m },
+                    { 3, 3, 2, 5m },
+                    { 4, 2, 2, 4m }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Rezervacije",
+                columns: new[] { "RezervacijaID", "AdresaDostave", "BiljkeID", "DatumRezervacije", "GradID", "Kolicina", "KorisnikID", "Napomena", "SvrhaID" },
+                values: new object[,]
+                {
+                    { 1, "Ćamila Sijarića", 1, new DateTime(2022, 5, 6, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 2, 1, "", 1 },
+                    { 2, "Azize Šaćirbegović", 2, new DateTime(2022, 4, 6, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, 1, 2, "Dostava na adresu", 2 },
+                    { 3, "Nedima Filipovića", 3, new DateTime(2022, 4, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 3, 1, "Placanje pri preuzimanju", 1 },
+                    { 4, "Hasana Brkića", 4, new DateTime(2022, 5, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, 4, 2, "Placanje pri preuzimanju", 3 }
                 });
 
             migrationBuilder.InsertData(

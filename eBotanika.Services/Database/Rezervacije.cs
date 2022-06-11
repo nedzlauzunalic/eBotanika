@@ -15,6 +15,7 @@
         public string Napomena { get; set; }
         public int Kolicina { get; set; }
         public int SvrhaID { get; set; }
+        public string AdresaDostave { get; set; }
         public Svrha Svrha { get; set; }
         public int BiljkeID { get; set; }
         public Biljke Biljke { get; set; }

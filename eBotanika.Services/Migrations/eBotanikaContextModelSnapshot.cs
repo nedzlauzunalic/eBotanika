@@ -331,7 +331,7 @@ namespace eBotanika.Services.Migrations
                         new
                         {
                             KorisnikID = 1,
-                            DatumRodjenja = new DateTime(2022, 6, 6, 11, 38, 12, 327, DateTimeKind.Local).AddTicks(9078),
+                            DatumRodjenja = new DateTime(2022, 6, 11, 14, 54, 57, 697, DateTimeKind.Local).AddTicks(3456),
                             Email = "korisnik@live.com",
                             Ime = "Mobile",
                             KorisnickoIme = "mobile",
@@ -343,7 +343,7 @@ namespace eBotanika.Services.Migrations
                         new
                         {
                             KorisnikID = 2,
-                            DatumRodjenja = new DateTime(2022, 6, 6, 11, 38, 12, 327, DateTimeKind.Local).AddTicks(9140),
+                            DatumRodjenja = new DateTime(2022, 6, 11, 14, 54, 57, 697, DateTimeKind.Local).AddTicks(3531),
                             Email = "adnan@live.com",
                             Ime = "Adnan",
                             KorisnickoIme = "adnan",
@@ -381,6 +381,36 @@ namespace eBotanika.Services.Migrations
                     b.HasIndex("KorisnikID");
 
                     b.ToTable("Ocjena");
+
+                    b.HasData(
+                        new
+                        {
+                            OcjenaID = 1,
+                            BiljkeID = 1,
+                            KorisnikID = 1,
+                            OcjenaUsluge = 4m
+                        },
+                        new
+                        {
+                            OcjenaID = 2,
+                            BiljkeID = 2,
+                            KorisnikID = 1,
+                            OcjenaUsluge = 5m
+                        },
+                        new
+                        {
+                            OcjenaID = 3,
+                            BiljkeID = 3,
+                            KorisnikID = 2,
+                            OcjenaUsluge = 5m
+                        },
+                        new
+                        {
+                            OcjenaID = 4,
+                            BiljkeID = 2,
+                            KorisnikID = 2,
+                            OcjenaUsluge = 4m
+                        });
                 });
 
             modelBuilder.Entity("eBotanika.Services.Database.Placanje", b =>
@@ -413,6 +443,26 @@ namespace eBotanika.Services.Migrations
                     b.HasIndex("KorisnikId");
 
                     b.ToTable("Placanje");
+
+                    b.HasData(
+                        new
+                        {
+                            PlacanjeID = 1,
+                            BrojKartice = 123445677,
+                            ExpMonth = 2,
+                            ExpYear = 23,
+                            KorisnikId = 1,
+                            SecurityCode = 123
+                        },
+                        new
+                        {
+                            PlacanjeID = 2,
+                            BrojKartice = 987654678,
+                            ExpMonth = 7,
+                            ExpYear = 25,
+                            KorisnikId = 2,
+                            SecurityCode = 134
+                        });
                 });
 
             modelBuilder.Entity("eBotanika.Services.Database.Rezervacije", b =>
@@ -423,6 +473,10 @@ namespace eBotanika.Services.Migrations
                         .HasColumnName("RezervacijaID");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RezervacijaID"), 1L, 1);
+
+                    b.Property<string>("AdresaDostave")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("BiljkeID")
                         .HasColumnType("int");
@@ -466,6 +520,7 @@ namespace eBotanika.Services.Migrations
                         new
                         {
                             RezervacijaID = 1,
+                            AdresaDostave = "Ćamila Sijarića",
                             BiljkeID = 1,
                             DatumRezervacije = new DateTime(2022, 5, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             GradID = 1,
@@ -477,6 +532,7 @@ namespace eBotanika.Services.Migrations
                         new
                         {
                             RezervacijaID = 2,
+                            AdresaDostave = "Azize Šaćirbegović",
                             BiljkeID = 2,
                             DatumRezervacije = new DateTime(2022, 4, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             GradID = 2,
@@ -488,6 +544,7 @@ namespace eBotanika.Services.Migrations
                         new
                         {
                             RezervacijaID = 3,
+                            AdresaDostave = "Nedima Filipovića",
                             BiljkeID = 3,
                             DatumRezervacije = new DateTime(2022, 4, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             GradID = 1,
@@ -499,6 +556,7 @@ namespace eBotanika.Services.Migrations
                         new
                         {
                             RezervacijaID = 4,
+                            AdresaDostave = "Hasana Brkića",
                             BiljkeID = 4,
                             DatumRezervacije = new DateTime(2022, 5, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             GradID = 3,

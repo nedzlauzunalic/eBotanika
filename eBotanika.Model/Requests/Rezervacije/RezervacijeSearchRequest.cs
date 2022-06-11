@@ -9,6 +9,7 @@ namespace eBotanika.Model.Requests.Rezervacije
         public int? GradID { get; set; }
         public DateTime? DatumRezervacije { get; set; }
         public int? SvrhaID { get; set; }
+        public string AdresaDostave { get; set; }
         public int Kolicina { get; set; }
         public int? BiljkeID { get; set; }
     }

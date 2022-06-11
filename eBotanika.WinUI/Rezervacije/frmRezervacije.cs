@@ -32,7 +32,8 @@ namespace eBotanika.WinUI.Rezervacije
                 KorisnikID = (int)comboBoxKorisnik.SelectedValue,
                 GradID = (int)comboBoxGrad.SelectedValue,
                 Kolicina = txtKolicina.Text,
-                BiljkeID = (int)comboBoxBiljke.SelectedValue
+                BiljkeID = (int)comboBoxBiljke.SelectedValue,
+                AdresaDostave = txtAdresaDostave.Text
             };
 
             var rezervacija = await _apiService.Insert<Model.Rezervacije>(insertRequest);
