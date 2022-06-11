@@ -25,14 +25,6 @@ namespace eBotanika.Services.Database
         public virtual DbSet<Uposlenik> Uposlenik { get; set; }
         public virtual DbSet<Kategorija> Kategorija { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured)
-            {
-                optionsBuilder.UseSqlServer("Data Source=localhost, 1433;Initial Catalog=eBotanika; user=sa; Password=QWElkj132!");
-            }
-        }
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Biljke>(entity =>

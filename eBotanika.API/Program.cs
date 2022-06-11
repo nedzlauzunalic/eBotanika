@@ -63,8 +63,6 @@ builder.Services.AddAutoMapper(typeof(IKorisnikService));
 
 builder.Services.AddAuthentication("BasicAuthentication")
     .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>("BasicAuthentication", null);
-builder.Services.AddAuthentication("BasicAuthenticationForMobile")
-    .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationForMobileHandler>("BasicAuthenticationForMobile", null);
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<eBotanikaContext>(options =>
@@ -89,7 +87,7 @@ app.MapControllers();
 using (var scope = app.Services.CreateScope())
 {
     var dataContext = scope.ServiceProvider.GetRequiredService<eBotanikaContext>();
-    //dataContext.Database.Migrate();
+    dataContext.Database.Migrate();
 }
 
 app.Run();
