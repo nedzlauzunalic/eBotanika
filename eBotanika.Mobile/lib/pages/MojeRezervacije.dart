@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 
 class MojeRezervacije extends StatefulWidget {
+  static const String routeName = "/mojeRezervacije";
+
   const MojeRezervacije({Key? key}) : super(key: key);
 
   @override
-  _MojeRezervacijeState createState() => _MojeRezervacijeState();
+  State<MojeRezervacije> createState() => _MojeRezervacijeState();
 }
 
 class _MojeRezervacijeState extends State<MojeRezervacije> {

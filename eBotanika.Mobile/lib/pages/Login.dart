@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '../services/APIService.dart';
 import 'package:provider/provider.dart';
-
 import 'Asortiman.dart';
 import 'Home.dart';
 
@@ -13,8 +12,8 @@ void main() => runApp(MultiProvider(
         debugShowCheckedModeBanner: true,
         home: const Login(),
         onGenerateRoute: (settings) {
-          if (settings.name == Home.routeName) {
-            return MaterialPageRoute(builder: ((context) => const Home()));
+          if (settings.name == Asortiman.routeName) {
+            return MaterialPageRoute(builder: ((context) => const Asortiman()));
           }
         },
       ),
@@ -83,7 +82,7 @@ class _LoginState extends State<Login> {
                     borderRadius: BorderRadius.circular(8)),
                 child: InkWell(
                   onTap: () {
-                    Navigator.pushNamed(context, Home.routeName);
+                    Navigator.pushNamed(context, Asortiman.routeName);
                   },
                   child: const Center(child: Text("Login")),
                 ),

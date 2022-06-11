@@ -1,19 +1,36 @@
-import 'package:json_annotation/json_annotation.dart';
-
-part 'biljke.g.dart';
-
-@JsonSerializable()
 class Biljke {
-  int? biljkaId;
-  String? naziv;
-  String? opis;
-  String? slika;
-  int? cijena;
+  int biljkaID;
+  int kategorijaID;
+  String naziv;
+  String opis;
+  String slika;
+  String cijena;
 
-  Biljke();
+  Biljke(
+      {required this.biljkaID,
+      required this.kategorijaID,
+      required this.naziv,
+      required this.opis,
+      required this.slika,
+      required this.cijena});
 
-  factory Biljke.fromJson(Map<String, dynamic> json) => _$BiljkeFromJson(json);
+  factory Biljke.fromJson(Map<String, dynamic> json) {
+    return Biljke(
+      biljkaID: int.parse(json["biljkaID"].toString()),
+      kategorijaID: int.parse(json["kategorijaID"].toString()),
+      naziv: json["naziv"],
+      opis: json["opis"],
+      slika: json["slika"],
+      cijena: json["cijena"],
+    );
+  }
 
-  /// Connect the generated [_$BiljkeFromJson] function to the `toJson` method.
-  Map<String, dynamic> toJson() => _$BiljkeToJson(this);
+  Map<String, dynamic> toJson() => {
+        "biljkaID": biljkaID,
+        "kategorijaID": kategorijaID,
+        "naziv": naziv,
+        "opis": opis,
+        "slika": slika,
+        "cijena": cijena
+      };
 }

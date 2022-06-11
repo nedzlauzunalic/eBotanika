@@ -16,7 +16,7 @@ class APIService with ChangeNotifier {
 
   Future<List<Biljke>> get(dynamic searchObject) async {
     print("called APIService.GET METHOD");
-    var url = Uri.parse("https://10.0.2.2:5000/Biljke");
+    var url = Uri.parse("http://192.168.0.21:44363/Biljke");
 
     String username = "desktop";
     String password = "test";
