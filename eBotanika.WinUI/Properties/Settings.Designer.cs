@@ -25,7 +25,7 @@ namespace eBotanika.WinUI.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost:5000/")]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost:44363/")]
         public string APIUrl {
             get {
                 return ((string)(this["APIUrl"]));

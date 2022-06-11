@@ -1,9 +1,11 @@
 ﻿using eBotanika.Model.Requests.Korisnik;
 using eBotanika.Services.Korisnik;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace eBotanika.API.Controllers
 {
+    [Authorize]
     [Route("[controller]")]
     [ApiController]
     public class KorisnikController : ControllerBase
