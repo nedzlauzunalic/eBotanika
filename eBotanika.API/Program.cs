@@ -11,6 +11,7 @@ using eBotanika.Services.Placanje;
 using eBotanika.Services.Rezervacije;
 using eBotanika.Services.Svrha;
 using eBotanika.Services.Uloge;
+using eBotanika.WebAPI.Filters;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
@@ -19,7 +20,10 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+builder.Services.AddControllers(x =>
+{
+    x.Filters.Add<ErrorFilter>();
+});
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -60,7 +64,7 @@ builder.Services.AddAutoMapper(typeof(IKorisnikService));
 builder.Services.AddAuthentication("BasicAuthentication")
     .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>("BasicAuthentication", null);
 
-var connectionString = builder.Configuration.GetConnectionString("eBotanika");
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<eBotanikaContext>(options =>
     options.UseSqlServer(connectionString));
 
@@ -73,11 +77,17 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 
 app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+
+using (var scope = app.Services.CreateScope())
+{
+    var dataContext = scope.ServiceProvider.GetRequiredService<eBotanikaContext>();
+    //dataContext.Database.Migrate();
+}
 
 app.Run();

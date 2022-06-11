@@ -12,6 +12,7 @@ namespace eBotanika.Model
         public Gradovi Grad { get; set; }
         public string Napomena { get; set; }
         public int SvrhaID { get; set; }
+        public string AdresaDostave { get; set; }
         public Svrha Svrha { get; set; }
         public string Kolicina { get; set; }
         public int BiljkeID { get; set; }

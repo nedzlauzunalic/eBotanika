@@ -10,7 +10,6 @@ namespace eBotanika.API.Controllers
     {
         public UposlenikUlogeController(IService<UposlenikUloge, object> service) : base(service)
         {
-
         }
     }
 }

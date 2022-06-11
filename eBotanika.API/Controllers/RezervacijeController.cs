@@ -1,6 +1,5 @@
 ﻿using eBotanika.Model.Requests.Rezervacije;
 using eBotanika.Services.Rezervacije;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace eBotanika.API.Controllers
@@ -16,21 +15,18 @@ namespace eBotanika.API.Controllers
             _service = service;
         }
 
-        [AllowAnonymous]
         [HttpGet]
         public List<Model.Rezervacije> Get([FromQuery] RezervacijeSearchRequest request)
         {
             return _service.Get(request);
         }
 
-        [AllowAnonymous]
         [HttpPost]
         public Model.Rezervacije Insert(RezervacijeInsertRequest request)
         {
             return _service.Insert(request);
         }
 
-        [AllowAnonymous]
         [HttpPut("{id}")]
         public Model.Rezervacije Update(int id, [FromBody] RezervacijeInsertRequest request)
         {

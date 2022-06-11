@@ -1,6 +1,5 @@
 ﻿using eBotanika.Model.Requests.Korisnik;
 using eBotanika.Services.Korisnik;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace eBotanika.API.Controllers
@@ -16,21 +15,18 @@ namespace eBotanika.API.Controllers
             _service = service;
         }
 
-        [AllowAnonymous]
         [HttpGet]
         public List<Model.Korisnik> Get([FromQuery] KorisnikSearchRequest request)
         {
             return _service.Get(request);
         }
 
-        [AllowAnonymous]
         [HttpPost]
         public Model.Korisnik Insert(KorisnikInsertRequest request)
         {
             return _service.Insert(request);
         }
 
-        [AllowAnonymous]
         [HttpPut("{id}")]
         public Model.Korisnik Update(int id, [FromBody] KorisnikInsertRequest request)
         {

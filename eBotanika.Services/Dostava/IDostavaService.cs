@@ -4,14 +4,14 @@ namespace eBotanika.Services.Dostava
 {
     public interface IDostavaService
     {
-        public List<Model.Dostava> Get(DostavaSearchRequest request);
+       List<Model.Dostava> Get(DostavaSearchRequest request);
 
-        public Model.Dostava Insert(DostavaInsertRequest request);
+       Model.Dostava Insert(DostavaInsertRequest request);
 
-        public Model.Dostava Update(int id, DostavaInsertRequest request);
+       Model.Dostava Update(int id, DostavaInsertRequest request);
 
-        public Model.Dostava GetById(int id);
+       Model.Dostava GetById(int id);
 
-        public Model.Dostava Delete(int id);
+       Model.Dostava Delete(int id);
     }
 }

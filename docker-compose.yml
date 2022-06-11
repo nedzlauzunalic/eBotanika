@@ -10,16 +10,20 @@ services:
             - MSSQL_PID=Developer
         ports:
             - 1401:1433
+        expose:
+            - 1433
         networks:
             - ebotanikanet
 
     ebotanika-api:
         restart: unless-stopped
-        build: .
+        build: 
+          context: .
         environment:
-            - ConnectionStrings:eBotanika=Server=ebotanika-sql,1433;Database=eBotanika;User=sa;Password=QWElkj132!;ConnectRetryCount=0
+            - ConnectionStrings:DefaultConnection=Server=ebotanika-sql,1433;Database=eBotanika;User=sa;Password=QWElkj132!;ConnectRetryCount=0
+            - ASPNETCORE_ENVIRONMENT=Development
         ports:
-            - 5000:5000
+            - 44363:44363
         networks:
             - ebotanikanet
         links:

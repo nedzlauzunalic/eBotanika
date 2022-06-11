@@ -19,11 +19,6 @@ namespace eBotanika.Services.Dostava
         {
             var query = _context.Set<Database.Dostava>().AsQueryable();
 
-            if (request.DostavaID == null)
-            {
-                query = query.Where(x => x.DostavaID == request.DostavaID);
-            }
-
             var list = query.ToList();
 
             return _mapper.Map<List<Model.Dostava>>(list);
