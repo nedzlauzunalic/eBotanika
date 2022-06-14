@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import 'Asortiman.dart';
 import 'Home.dart';
 
-void main() => runApp(MultiProvider(
+/* void main() => runApp(MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => APIService()),
       ],
@@ -17,7 +17,7 @@ void main() => runApp(MultiProvider(
           }
         },
       ),
-    ));
+    )); */
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -27,13 +27,13 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-  /* TextEditingController usernameController = new TextEditingController();
+  TextEditingController usernameController = new TextEditingController();
   TextEditingController passwordController = new TextEditingController();
   var result;
 
   Future<void> GetData() async {
-    result = await APIService.Get('Uposlenik', null);
-  } */
+    result = await APIService.login();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +55,7 @@ class _LoginState extends State<Login> {
               ),
               const SizedBox(height: 70),
               TextField(
-                  //controller: usernameController,
+                  controller: usernameController,
                   decoration: InputDecoration(
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(7)),
@@ -64,7 +64,7 @@ class _LoginState extends State<Login> {
                 height: 10,
               ),
               TextField(
-                  //controller: passwordController,
+                  controller: passwordController,
                   obscureText: true,
                   decoration: InputDecoration(
                       border: OutlineInputBorder(
@@ -74,33 +74,41 @@ class _LoginState extends State<Login> {
                 height: 20,
               ),
               Container(
-                padding: const EdgeInsets.all(10),
-                height: 60,
-                width: 250,
-                decoration: BoxDecoration(
-                    color: Colors.green[900],
-                    borderRadius: BorderRadius.circular(8)),
-                child: InkWell(
+                  padding: const EdgeInsets.all(10),
+                  height: 60,
+                  width: 250,
+                  decoration: BoxDecoration(
+                      color: Colors.green[900],
+                      borderRadius: BorderRadius.circular(8)),
+                  /* child: InkWell(
                   onTap: () {
                     Navigator.pushNamed(context, Asortiman.routeName);
                   },
                   child: const Center(child: Text("Login")),
-                ),
-                /* child: TextButton(
-                    onPressed: () async {
-                      APIService.username = usernameController.text;
-                      APIService.password = passwordController.text;
-                      await GetData();
-                      print(result);
-                      if (result != null) {
-                        print(result);
-                        Navigator.of(context).pushReplacementNamed('/home');
-                      }
-                    },
-                    child: const Text('Login',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(color: Colors.white, fontSize: 20))) */
-              )
+                ), */
+                  child: TextButton(
+                      onPressed: () async {
+                        APIService.username = usernameController.text;
+                        APIService.password = passwordController.text;
+                        await GetData();
+                        if (result != null) {
+                          print(result);
+                          Navigator.of(context).pushReplacementNamed('/home');
+                        } else {
+                          ScaffoldMessenger.of(context)
+                              .showSnackBar(const SnackBar(
+                            content: SizedBox(
+                                height: 20,
+                                child: Center(
+                                    child: Text(
+                                        "Pogresan username ili password."))),
+                            backgroundColor: Colors.red,
+                          ));
+                        }
+                      },
+                      child: const Text('Login',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(color: Colors.white, fontSize: 20))))
             ],
           ),
         ),

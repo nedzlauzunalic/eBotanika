@@ -1,43 +1,37 @@
 import 'dart:convert';
-import 'package:flutter/material.dart';
 import 'dart:io';
-import 'package:http/io_client.dart';
-import '../models/biljke.dart';
+import 'package:ebotanika_mobile/models/korisnik.dart';
+import 'package:http/http.dart' as http;
 
-class APIService with ChangeNotifier {
-  HttpClient client = HttpClient();
-  IOClient? http;
+class APIService {
+  static String? username;
+  static String? password;
+  String route;
 
-  APIService() {
-    print("called APIService");
-    client.badCertificateCallback = (cert, host, port) => true;
-    http = IOClient(client);
-  }
+  APIService({required this.route});
 
-  Future<List<Biljke>> get(dynamic searchObject) async {
-    print("called APIService.GET METHOD");
-    var url = Uri.parse("http://192.168.0.21:44363/Biljke");
+  //var url = Uri.parse("http://192.168.0.21:44363/Biljke");
 
-    String username = "desktop";
-    String password = "test";
+  static Future<Korisnik?> login() async {
+    //String queryString = Uri(queryParameters: object).query;
+    String baseUrl = "http://192.168.0.21:5000/Biljke";
 
-    String basicAuth =
-        "Basic ${base64Encode(utf8.encode('$username:$password'))}";
+    /* if (object != null) {
+      baseUrl = '$baseUrl?$queryString';
+    } */
 
-    var headers = {
-      "Content-Type": "application/json",
-      "Authorization": basicAuth
-    };
+    final String basicAuth =
+        'Basic ' + base64Encode(utf8.encode('$username:$password'));
 
-    var response = await http!.get(url, headers: headers);
+    final response = await http.get(
+      Uri.parse(baseUrl),
+      headers: {HttpHeaders.authorizationHeader: basicAuth},
+    );
 
-    if (response.statusCode < 400) {
-      var data = jsonDecode(response.body);
-      List<Biljke> list =
-          data.map((x) => Biljke.fromJson(x)).cast<Biljke>().toList();
-      return list;
-    } else {
-      throw Exception("User not allowed");
+    if (response.statusCode == 200) {
+      return Korisnik.fromJson(json.decode(response.body));
     }
+
+    return null;
   }
 }

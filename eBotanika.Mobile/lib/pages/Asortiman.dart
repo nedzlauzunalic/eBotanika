@@ -18,21 +18,21 @@ class _AsortimanState extends State<Asortiman> {
   List<Biljke> data = [];
 
   @override
-  void initState() {
+  /*  void initState() {
     // TODO: implement initState
     super.initState();
     _apiService = context.read<APIService>();
 
     print("called initState");
     loadData();
-  }
+  } */
 
-  Future loadData() async {
+  /* Future loadData() async {
     var tmpData = await _apiService?.get(null);
     setState(() {
       data = tmpData!;
     });
-  }
+  } */
 
   @override
   Widget build(BuildContext context) {
