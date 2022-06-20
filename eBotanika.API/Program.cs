@@ -68,8 +68,6 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 builder.Services.AddDbContext<eBotanikaContext>(options =>
     options.UseSqlServer(connectionString));
 
-builder.WebHost.UseUrls("http://localhost:5000", "http://192.168.0.21:5000");
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -79,15 +77,14 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseRouting();
+
 //app.UseHttpsRedirection();
 
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.UseEndpoints(endpoints =>
-{
-    endpoints.MapControllers();
-});
+app.MapControllers();
 
 using (var scope = app.Services.CreateScope())
 {
