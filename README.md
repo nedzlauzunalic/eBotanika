@@ -1,13 +1,16 @@
-eBotanika
+# eBotanika
 
-Desktop app:
- Korisnicko ime: desktop
- lozinka: test
+### Desktop app:
+ - Username: desktop
+ - Pw: test
  
-Mobilna app:
- Korisnicko ime: mobile
- lozinka: test
+### Mobile app:
+ - Username: mobile
+ - Pw: test
  
-Docker
- docker-compose build
- docker-compose up
+## Installation
+1. Clone the repo
+   - git clone https://github.com/nedzlauzunalic/eBotanika.git
+2. Open project folder and run in cmd
+ - docker-compose build
+ - docker-compose up
