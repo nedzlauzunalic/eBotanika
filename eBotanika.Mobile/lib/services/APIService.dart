@@ -14,14 +14,14 @@ class APIService {
 
   static Future<Korisnik?> login() async {
     //String queryString = Uri(queryParameters: object).query;
-    String baseUrl = "http://192.168.0.21:5000/Biljke";
+    String baseUrl = "http://10.0.2.2:44363/Biljke";
 
     /* if (object != null) {
       baseUrl = '$baseUrl?$queryString';
     } */
 
     final String basicAuth =
-        'Basic ' + base64Encode(utf8.encode('$username:$password'));
+        'Basic ${base64Encode(utf8.encode('$username:$password'))}';
 
     final response = await http.get(
       Uri.parse(baseUrl),
