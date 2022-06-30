@@ -1,4 +1,7 @@
+import 'package:ebotanika_mobile/services/APIservice.dart';
 import 'package:flutter/material.dart';
+
+import '../models/korisnik.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -7,10 +10,15 @@ class Login extends StatefulWidget {
   _LoginState createState() => _LoginState();
 }
 
+var result;
+
+Future<void> login() async {
+  result = await APIService.login();
+}
+
 class _LoginState extends State<Login> {
   TextEditingController usernameController = new TextEditingController();
   TextEditingController passwordController = new TextEditingController();
-  var result;
 
   @override
   Widget build(BuildContext context) {
@@ -57,29 +65,21 @@ class _LoginState extends State<Login> {
                   decoration: BoxDecoration(
                       color: Colors.green[900],
                       borderRadius: BorderRadius.circular(8)),
-                  /* child: InkWell(
-                  onTap: () {
-                    Navigator.pushNamed(context, Asortiman.routeName);
-                  },
-                  child: const Center(child: Text("Login")),
-                ), */
                   child: TextButton(
                       onPressed: () async {
-                        
-                       
+                        APIService.username = usernameController.text;
+                        APIService.password = passwordController.text;
+                        await login();
                         if (result != null) {
                           print(result);
+                          //APIService.korisnikId = result[0].korisnikId;
                           Navigator.of(context).pushReplacementNamed('/home');
-                        } else {
-                          ScaffoldMessenger.of(context)
-                              .showSnackBar(const SnackBar(
-                            content: SizedBox(
-                                height: 20,
-                                child: Center(
-                                    child: Text(
-                                        "Pogresan username ili password."))),
-                            backgroundColor: Colors.red,
-                          ));
+                        }
+                        else{
+                          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                            content:
+                              Text("Pogresan username ili password."),)              
+                          );
                         }
                       },
                       child: const Text('Login',

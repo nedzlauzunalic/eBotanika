@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class NovaRezervacija extends StatefulWidget {
-  const NovaRezervacija({Key? key}) : super(key: key);
+  const NovaRezervacija({Key? key, required product}) : super(key: key);
 
   @override
   _NovaRezervacijaState createState() => _NovaRezervacijaState();
@@ -11,6 +11,10 @@ class _NovaRezervacijaState extends State<NovaRezervacija> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+          title: const Text('Kreiraj rezervaciju'),
+          backgroundColor: Colors.green[900],
+        ),
         body: SingleChildScrollView(
             child: Padding(
                 padding: const EdgeInsets.all(40),

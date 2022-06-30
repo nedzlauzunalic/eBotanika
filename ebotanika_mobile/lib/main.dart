@@ -1,6 +1,5 @@
-import 'package:ebotanika_mobile/models/dostava.dart';
 import 'package:flutter/material.dart';
-//import 'package:ebotanika_mobile/pages/Login.dart';
+import 'package:ebotanika_mobile/pages/Login.dart';
 import 'package:ebotanika_mobile/pages/Home.dart';
 import 'package:ebotanika_mobile/pages/Asortiman.dart';
 import 'package:ebotanika_mobile/pages/NovaRezervacija.dart';
@@ -20,11 +19,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: const Asortiman(),
+      home: const Login(),
       routes: {
         '/home': (context) => const Home(),
         '/asortiman': (context) => const Asortiman(),
-        '/novaRezervacija': (context) => const NovaRezervacija(),
+        '/novaRezervacija': (context) => const NovaRezervacija(product: null,),
         '/mojeRezervacije': (context) => const MojeRezervacije(),
         '/placanje': (context) => const Placanje(),
         '/dostava': (context) => const Dostave(),

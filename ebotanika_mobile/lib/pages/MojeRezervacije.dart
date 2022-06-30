@@ -13,6 +13,10 @@ class _MojeRezervacijeState extends State<MojeRezervacije> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+          title: const Text('Moje rezervacije'),
+          backgroundColor: Colors.green[900],
+        ),
         body: Center(
             child: Padding(
                 padding: const EdgeInsets.all(40),

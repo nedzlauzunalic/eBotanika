@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:http/http.dart' as http;
+import '../models/korisnik.dart';
 
 class APIService {
   static String? username;
@@ -10,9 +11,30 @@ class APIService {
 
   APIService({required this.route});
 
-  static Future<List<dynamic>?> Get(String route, dynamic object) async {
+  void setParameter(String username, String password) {
+    username = username;
+    password = password;
+  }
+
+  static Future<List<dynamic>> login() async {
+    String baseUrl = "http://10.0.2.2:44363/Korisnik";
+
+    final String basicAuth =
+        'Basic ${base64Encode(utf8.encode('$username:$password'))}';
+
+    final response = await http.get(Uri.parse(baseUrl),
+        headers: {HttpHeaders.authorizationHeader: basicAuth});
+
+    if (response.statusCode == 200) {
+      return json.decode(response.body) as List;
+    } else {
+      throw Exception("Pogrešan username ili password.");
+    }
+  }
+
+  static Future<List<dynamic>?> get(String route, dynamic object) async {
     String queryString = Uri(queryParameters: object).query;
-    String baseUrl = "http://10.0.2.2:44363/" + route;
+    String baseUrl = "http://10.0.2.2:44363/$route";
 
     if (object != null) {
       baseUrl = '$baseUrl?$queryString';
@@ -29,8 +51,8 @@ class APIService {
     return null;
   }
 
-  static Future<dynamic> GetById(String route, int id) async {
-    String baseUrl = "http://10.0.2.2:44363/" + route + "/" + id.toString();
+  static Future<dynamic> getById(String route, int id) async {
+    String baseUrl = "http://10.0.2.2:44363/$route/$id";
     final String basicAuth =
         'Basic ${base64Encode(utf8.encode('$username:$password'))}';
     final response = await http.get(

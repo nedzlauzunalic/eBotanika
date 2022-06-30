@@ -11,6 +11,10 @@ class _KontaktState extends State<Kontakt> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+          title: const Text('Kontakt e-Botanike'),
+          backgroundColor: Colors.green[900],
+        ),
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(40),

@@ -13,6 +13,10 @@ class _PlacanjeState extends State<Placanje> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+          title: const Text('Način plaćanja'),
+          backgroundColor: Colors.green[900],
+        ),
         body: Center(
             child: Padding(
                 padding: EdgeInsets.all(40),

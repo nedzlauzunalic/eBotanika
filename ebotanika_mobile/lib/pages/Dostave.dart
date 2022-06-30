@@ -13,7 +13,12 @@ class Dostave extends StatefulWidget {
 class _DostaveState extends State<Dostave> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: bodyWidget());
+    return Scaffold(
+      appBar: AppBar(
+          title: const Text('Dostava'),
+          backgroundColor: Colors.green[900],
+        ),
+        body: bodyWidget());
   }
 
   Widget bodyWidget() {
@@ -108,7 +113,7 @@ class _DostaveState extends State<Dostave> {
   }
 
   Future<Dostava> GetDostava() async {
-    var dostava = await APIService.GetById('Dostava', 1);
+    var dostava = await APIService.getById('Dostava', 1);
     return Dostava.fromJson(dostava);
   }
 }
