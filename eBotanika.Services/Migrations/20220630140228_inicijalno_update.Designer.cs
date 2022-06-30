@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using eBotanika.Services.Database;
 
@@ -11,9 +12,10 @@ using eBotanika.Services.Database;
 namespace eBotanika.Services.Migrations
 {
     [DbContext(typeof(eBotanikaContext))]
-    partial class eBotanikaContextModelSnapshot : ModelSnapshot
+    [Migration("20220630140228_inicijalno_update")]
+    partial class inicijalno_update
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

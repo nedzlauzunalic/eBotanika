@@ -138,7 +138,7 @@ namespace eBotanika.Services.Database
                 KategorijaID = 1,
                 Naziv = "Petunija",
                 Opis = "Petunija pripada porodici pomoćnica,porijeklom iz Južne Amerike.",
-                Slika = "images/1.jpg",
+                Slika = "1.jpg",
                 Cijena = 1
             });
             modelBuilder.Entity<Biljke>().HasData(new Biljke()
@@ -147,7 +147,7 @@ namespace eBotanika.Services.Database
                 KategorijaID = 2,
                 Naziv = "Lavanda ",
                 Opis = "Lavanda cvati u proljeće i u jesen ukoliko se dobro podreže nakon prve cvatnje.",
-                Slika = "images/2.jpg",
+                Slika = "2.jpg",
                 Cijena = 3
             });
             modelBuilder.Entity<Biljke>().HasData(new Biljke()
@@ -156,7 +156,7 @@ namespace eBotanika.Services.Database
                 KategorijaID = 3,
                 Naziv = "Kesten",
                 Opis = "Pitomi kesten (Castanea sativa) je listopadno stablo iz porodice bukvi.",
-                Slika = "images/3.jpg",
+                Slika = "3.jpg",
                 Cijena = 65
             });
             modelBuilder.Entity<Biljke>().HasData(new Biljke()
@@ -165,7 +165,7 @@ namespace eBotanika.Services.Database
                 KategorijaID = 4,
                 Naziv = "Patuljasta kleka",
                 Opis = "Patuljak smreka je jedna od mnogo varijanti ove zimzelene biljke koja obično raste kao grm.",
-                Slika = "images/4.jpg",
+                Slika = "4.jpg",
                 Cijena = 50
             });
             modelBuilder.Entity<Biljke>().HasData(new Biljke()
@@ -174,7 +174,7 @@ namespace eBotanika.Services.Database
                 KategorijaID = 5,
                 Naziv = "Planinski bor",
                 Opis = "Planinski bor, klekovina ili bor krivulj je crnogorična vrsta drveća iz porodice Pinaceae.",
-                Slika = "images/5.jpg",
+                Slika = "5.jpg",
                 Cijena = 45
             });
             #endregion

@@ -87,7 +87,7 @@ class _AsortimanState extends State<Asortiman> {
         Image(
           height: 50,
           width: 50,
-          image: AssetImage(Biljke.slika),
+          image: AssetImage('assets/${Biljke.slika}'),
         ),
         SizedBox(
           height: 35,
