@@ -1,3 +1,4 @@
+import 'package:ebotanika_mobile/pages/Registracija.dart';
 import 'package:flutter/material.dart';
 import 'package:ebotanika_mobile/pages/Login.dart';
 import 'package:ebotanika_mobile/pages/Home.dart';
@@ -23,11 +24,12 @@ class MyApp extends StatelessWidget {
       routes: {
         '/home': (context) => const Home(),
         '/asortiman': (context) => const Asortiman(),
-        '/novaRezervacija': (context) => const NovaRezervacija(product: null,),
+        '/novaRezervacija': (context) => const NovaRezervacija(rezervacija: null),
         '/mojeRezervacije': (context) => const MojeRezervacije(),
-        '/placanje': (context) => const Placanje(),
+        '/placanje': (context) => const Placanje(rezervacija: null),
         '/dostava': (context) => const Dostave(),
-        '/kontakt': (context) => const Kontakt()
+        '/kontakt': (context) => const Kontakt(),
+        '/registracija': (context) => const Registracija()
       },
     );
   }

@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:flutter/src/widgets/editable_text.dart';
 import 'package:http/http.dart' as http;
 import '../models/korisnik.dart';
 
@@ -16,7 +17,7 @@ class APIService {
     password = password;
   }
 
-  static Future<List<dynamic>> login() async {
+  static Future<List<dynamic>?> login() async {
     String baseUrl = "http://10.0.2.2:44363/Korisnik";
 
     final String basicAuth =
@@ -27,9 +28,9 @@ class APIService {
 
     if (response.statusCode == 200) {
       return json.decode(response.body) as List;
-    } else {
-      throw Exception("Pogrešan username ili password.");
     }
+
+    return null;
   }
 
   static Future<List<dynamic>?> get(String route, dynamic object) async {
@@ -42,25 +43,46 @@ class APIService {
 
     final String basicAuth =
         'Basic ${base64Encode(utf8.encode('$username:$password'))}';
+
     final response = await http.get(Uri.parse(baseUrl),
         headers: {HttpHeaders.authorizationHeader: basicAuth});
 
     if (response.statusCode == 200) {
       return json.decode(response.body) as List;
     }
+
     return null;
   }
 
   static Future<dynamic> getById(String route, int id) async {
     String baseUrl = "http://10.0.2.2:44363/$route/$id";
+
     final String basicAuth =
         'Basic ${base64Encode(utf8.encode('$username:$password'))}';
+
     final response = await http.get(
       Uri.parse(baseUrl),
       headers: {HttpHeaders.authorizationHeader: basicAuth},
     );
 
     if (response.statusCode == 200) return json.decode(response.body);
+
+    return null;
+  }
+
+  static Future<dynamic> post(String route, String body) async {
+    String baseUrl = "http://10.0.2.2:44363/$route";
+
+    final response = await http.post(
+      Uri.parse(baseUrl),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: body,
+    );
+
+    if (response.statusCode == 200) { return json.decode(response.body); }
+
     return null;
   }
 }

@@ -43,10 +43,7 @@ class _DostaveState extends State<Dostave> {
         child: Center(
             child: Padding(
       padding: const EdgeInsets.all(40),
-      child: Column(mainAxisAlignment: MainAxisAlignment.start, children: [
-        const SizedBox(
-          height: 35,
-        ),
+      child: Column(mainAxisAlignment: MainAxisAlignment.start, children: [       
         const Image(
           width: 95,
           height: 100,

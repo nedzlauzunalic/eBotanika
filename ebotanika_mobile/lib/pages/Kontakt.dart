@@ -17,7 +17,7 @@ class _KontaktState extends State<Kontakt> {
         ),
       body: Center(
         child: Padding(
-          padding: const EdgeInsets.all(40),
+          padding: const EdgeInsets.all(20),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: const [

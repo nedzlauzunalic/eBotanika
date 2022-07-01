@@ -1,6 +1,5 @@
 import 'package:ebotanika_mobile/services/APIservice.dart';
 import 'package:flutter/material.dart';
-
 import '../models/korisnik.dart';
 
 class Login extends StatefulWidget {
@@ -10,7 +9,7 @@ class Login extends StatefulWidget {
   _LoginState createState() => _LoginState();
 }
 
-var result;
+var result = null;
 
 Future<void> login() async {
   result = await APIService.login();
@@ -36,7 +35,7 @@ class _LoginState extends State<Login> {
               ),
               const Text(
                 'eBotanika',
-                style: TextStyle(fontSize: 30, color: Colors.green),
+                style: TextStyle(fontSize: 30, color: Colors.black),
               ),
               const SizedBox(height: 70),
               TextField(
@@ -74,17 +73,45 @@ class _LoginState extends State<Login> {
                           print(result);
                           //APIService.korisnikId = result[0].korisnikId;
                           Navigator.of(context).pushReplacementNamed('/home');
-                        }
-                        else{
-                          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                            content:
-                              Text("Pogresan username ili password."),)              
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              behavior: SnackBarBehavior.floating,
+                              backgroundColor: Colors.transparent,
+                              elevation: 0,
+                              content: Container(
+                                padding: const EdgeInsets.all(16),
+                                height: 50,
+                                decoration: const BoxDecoration(
+                                  color: Colors.red,
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(20)),
+                                ),
+                                child: const Text(
+                                    "Pogrešan username ili password!"),
+                              ),
+                            ),
                           );
                         }
                       },
                       child: const Text('Login',
                           textAlign: TextAlign.center,
-                          style: TextStyle(color: Colors.white, fontSize: 20))))
+                          style:
+                              TextStyle(color: Colors.white, fontSize: 20)))),
+              const SizedBox(
+                height: 10,
+              ),
+              GestureDetector(
+                child: const Text('Registrujte se',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        color: Colors.blue,
+                        fontSize: 17,
+                        decoration: TextDecoration.underline)),
+                onTap: () async {
+                  Navigator.of(context).pushReplacementNamed('/registracija');
+                },
+              ),
             ],
           ),
         ),
