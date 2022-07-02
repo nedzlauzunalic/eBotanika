@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/home': (context) => const Home(),
         '/asortiman': (context) => const Asortiman(),
-        '/novaRezervacija': (context) => const NovaRezervacija(rezervacija: null),
+        '/novaRezervacija': (context) => const NovaRezervacija(biljkaID: null),
         '/mojeRezervacije': (context) => const MojeRezervacije(),
         '/placanje': (context) => const Placanje(rezervacija: null),
         '/dostava': (context) => const Dostave(),

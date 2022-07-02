@@ -1,8 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
-import 'package:flutter/src/widgets/editable_text.dart';
 import 'package:http/http.dart' as http;
-import '../models/korisnik.dart';
 
 class APIService {
   static String? username;
@@ -17,7 +15,7 @@ class APIService {
     password = password;
   }
 
-  static Future<List<dynamic>?> login() async {
+  static Future<dynamic> login() async {
     String baseUrl = "http://10.0.2.2:44363/Korisnik";
 
     final String basicAuth =
@@ -27,7 +25,15 @@ class APIService {
         headers: {HttpHeaders.authorizationHeader: basicAuth});
 
     if (response.statusCode == 200) {
-      return json.decode(response.body) as List;
+      var lista = json.decode(response.body) as List;
+      for(var item in lista)
+      {
+        if(item["korisnickoIme"] == username)
+        {
+         korisnikId = item["korisnikID"];
+         return korisnikId;
+        }       
+      }
     }
 
     return null;

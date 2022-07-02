@@ -1,6 +1,5 @@
 import 'package:ebotanika_mobile/services/APIservice.dart';
 import 'package:flutter/material.dart';
-import '../models/korisnik.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -70,8 +69,7 @@ class _LoginState extends State<Login> {
                         APIService.password = passwordController.text;
                         await login();
                         if (result != null) {
-                          print(result);
-                          //APIService.korisnikId = result[0].korisnikId;
+                          print(result);                      
                           Navigator.of(context).pushReplacementNamed('/home');
                         } else {
                           ScaffoldMessenger.of(context).showSnackBar(

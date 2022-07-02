@@ -87,7 +87,7 @@ class _AsortimanState extends State<Asortiman> {
                   context,
                   MaterialPageRoute(
                       builder: (context) => NovaRezervacija(
-                            rezervacija: Biljke,
+                            biljkaID: Biljke.biljkeID,
                           )));
             },
             style: ElevatedButton.styleFrom(
