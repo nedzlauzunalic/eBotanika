@@ -1,5 +1,4 @@
 class Placanje {
-  int placanjeID;
   int korisnikID;
   int brojKartice;
   int securityCode;
@@ -7,8 +6,7 @@ class Placanje {
   int expMonth;
 
   Placanje(
-      {required this.placanjeID,
-      required this.korisnikID,
+      {required this.korisnikID,
       required this.brojKartice,
       required this.securityCode,
       required this.expYear,
@@ -16,7 +14,6 @@ class Placanje {
 
   factory Placanje.fromJson(Map<String, dynamic> json) {
     return Placanje(
-        placanjeID: json["placanjeID"],
         korisnikID: json["korisnikID"],
         brojKartice: json["brojKartice"],
         securityCode: json["securityCode"],
@@ -25,7 +22,6 @@ class Placanje {
   }
 
   Map<String, dynamic> toJson() => {
-        "placanjeID": placanjeID,
         "korisnikID": korisnikID,
         "brojKartice": brojKartice,
         "securityCode": securityCode,

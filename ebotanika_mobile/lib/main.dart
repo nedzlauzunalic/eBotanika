@@ -5,7 +5,7 @@ import 'package:ebotanika_mobile/pages/Home.dart';
 import 'package:ebotanika_mobile/pages/Asortiman.dart';
 import 'package:ebotanika_mobile/pages/NovaRezervacija.dart';
 import 'package:ebotanika_mobile/pages/MojeRezervacije.dart';
-import 'package:ebotanika_mobile/pages/Placanje.dart';
+import 'package:ebotanika_mobile/pages/Placanja.dart';
 import 'package:ebotanika_mobile/pages/Dostave.dart';
 import 'package:ebotanika_mobile/pages/Kontakt.dart';
 
@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
         '/asortiman': (context) => const Asortiman(),
         '/novaRezervacija': (context) => NovaRezervacija(biljkaID: 0),
         '/mojeRezervacije': (context) => const MojeRezervacije(),
-        '/placanje': (context) => const Placanje(rezervacija: null),
+        '/placanje': (context) => const Placanja(),
         '/dostava': (context) => const Dostave(),
         '/kontakt': (context) => const Kontakt(),
         '/registracija': (context) => const Registracija()

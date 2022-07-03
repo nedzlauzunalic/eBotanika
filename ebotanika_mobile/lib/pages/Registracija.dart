@@ -130,15 +130,18 @@ class _RegistracijaState extends State<Registracija> {
                   borderRadius: BorderRadius.circular(8)),
               child: TextButton(
                   onPressed: () async {
+                    var date = datumRodjenjaController.text;
+                              DateTime formatedDate =
+                                  DateFormat('yyyy-MM-dd').parse(date);
                     var request = Korisnik(
                         ime: imeController.text,
                         prezime: prezimeController.text,
                         email: emailController.text,
                         telefon: telefonController.text,
-                        datumRodjenja: datumRodjenjaController.text,
+                        datumRodjenja: formatedDate.toString(),
                         korisnickoIme: korisnickoImeController.text,
-                        lozinka: lozinkaController.text,
-                        lozinkaPotvrda: lozinkaPotvrdaController.text);
+                        password: lozinkaController.text,
+                        passwordPotvrda: lozinkaPotvrdaController.text);
 
                     var result = await APIService.post(
                         "Korisnik", json.encode(request.toJson()));

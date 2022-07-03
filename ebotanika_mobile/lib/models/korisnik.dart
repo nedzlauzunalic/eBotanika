@@ -5,8 +5,8 @@ class Korisnik {
   String telefon;
   String datumRodjenja;
   String korisnickoIme;
-  String lozinka;
-  String lozinkaPotvrda;
+  String password;
+  String passwordPotvrda;
 
   Korisnik(
       {
@@ -16,8 +16,8 @@ class Korisnik {
       required this.telefon,
       required this.datumRodjenja,
       required this.korisnickoIme,
-      required this.lozinka,
-      required this.lozinkaPotvrda});
+      required this.password,
+      required this.passwordPotvrda});
 
   factory Korisnik.fromJson(Map<String, dynamic> json) {
     return Korisnik(
@@ -27,8 +27,8 @@ class Korisnik {
         telefon: json["telefon"],
         datumRodjenja: json["datumRodjenja"],
         korisnickoIme: json["korisnickoIme"],
-        lozinka: json["lozinka"],
-        lozinkaPotvrda: json["lozinkaPotvrda"]);
+        password: json["password"],
+        passwordPotvrda: json["passwordPotvrda"]);
   }
 
   Map<String, dynamic> toJson() => {
@@ -38,7 +38,7 @@ class Korisnik {
         "telefon": telefon,
         "datumRodjenja": datumRodjenja,
         "korisnickoIme": korisnickoIme,
-        "lozinka": lozinka,
-        "lozinkaPotvrda": lozinkaPotvrda
+        "password": password,
+        "passwordPotvrda": passwordPotvrda
       };
 }
