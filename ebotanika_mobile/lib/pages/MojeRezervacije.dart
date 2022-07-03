@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:ebotanika_mobile/models/rezervacije.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -11,7 +13,8 @@ class MojeRezervacije extends StatefulWidget {
 }
 
 class _MojeRezervacijeState extends State<MojeRezervacije> {
-  @override
+  late List listaRezervacija;
+
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
@@ -22,16 +25,20 @@ class _MojeRezervacijeState extends State<MojeRezervacije> {
   }
 
   Widget bodyWidget() {
-    return FutureBuilder(
+    return FutureBuilder<dynamic>(
       future: getRezervacije(),
-      builder: (BuildContext context, AsyncSnapshot<Rezervacije> snapshot) {
+      builder:
+          (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(child: Text('Loading..'));
         } else {
           if (snapshot.hasError) {
             return Center(child: Text('Error:${snapshot.error}'));
           } else {
-            return MojeRezervacijeWidget(snapshot.data);
+            return ListView(
+              children:
+                  snapshot.data!.map((e) => MojeRezervacijeWidget(e)).toList(),
+            );
           }
         }
       },
@@ -117,8 +124,13 @@ class _MojeRezervacijeState extends State<MojeRezervacije> {
                         ])))));
   }
 
-  Future<Rezervacije> getRezervacije() async {
-    var rezervacije = await APIService.getById('Rezervacije', 2);
-    return Rezervacije.fromJson(rezervacije);
+  Future<List<Rezervacije>?> getRezervacije() async {
+    var rezervacije = await APIService.get('Rezervacije', null);
+    for (var item in rezervacije!) {
+      if (item["korisnikID"] == APIService.korisnikId) {
+        return item!.map((i) => Rezervacije.fromJson(i));
+      }
+    }
+    return null;
   }
 }

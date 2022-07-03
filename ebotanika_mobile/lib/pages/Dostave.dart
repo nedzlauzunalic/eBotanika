@@ -40,7 +40,7 @@ class _DostaveState extends State<Dostave> {
 
   Widget DostavaWidget(Dostava) {
     return Card(
-        child: Center(
+        child: SingleChildScrollView(
             child: Padding(
       padding: const EdgeInsets.all(40),
       child: Column(mainAxisAlignment: MainAxisAlignment.start, children: [       
@@ -110,7 +110,7 @@ class _DostaveState extends State<Dostave> {
   }
 
   Future<Dostava> GetDostava() async {
-    var dostava = await APIService.getById('Dostava', 1);
+    var dostava = await APIService.getById('Dostava', APIService.korisnikId);
     return Dostava.fromJson(dostava);
   }
 }
