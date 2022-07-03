@@ -6,7 +6,7 @@ namespace eBotanika.Services.Rezervacije
     {
         List<Model.Rezervacije> Get(RezervacijeSearchRequest request);
 
-        Model.Rezervacije GetById(int id);
+        List<Model.Rezervacije> GetById(int id);
 
         Model.Rezervacije Insert(RezervacijeInsertRequest request);
 
