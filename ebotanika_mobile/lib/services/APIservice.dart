@@ -5,7 +5,8 @@ import 'package:http/http.dart' as http;
 class APIService {
   static String? username;
   static String? password;
-  static int? korisnikId;
+  static int korisnikId = 0;
+  static int? rezervacijaId;
   String route;
 
   APIService({required this.route});
@@ -26,13 +27,11 @@ class APIService {
 
     if (response.statusCode == 200) {
       var lista = json.decode(response.body) as List;
-      for(var item in lista)
-      {
-        if(item["korisnickoIme"] == username)
-        {
-         korisnikId = item["korisnikID"];
-         return korisnikId;
-        }       
+      for (var item in lista) {
+        if (item["korisnickoIme"] == username) {
+          korisnikId = item["korisnikID"];
+          return korisnikId;
+        }
       }
     }
 
@@ -79,16 +78,22 @@ class APIService {
   static Future<dynamic> post(String route, String body) async {
     String baseUrl = "http://10.0.2.2:44363/$route";
 
+    final String basicAuth =
+        'Basic ${base64Encode(utf8.encode('$username:$password'))}';
+
     final response = await http.post(
       Uri.parse(baseUrl),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
+        HttpHeaders.authorizationHeader: basicAuth
       },
       body: body,
     );
-
-    if (response.statusCode == 200) { return json.decode(response.body); }
-
-    return null;
+  
+    if (response.statusCode == 200) {
+      return json.decode(response.body.toString());
+    } else {
+      return null;
+    }
   }
 }

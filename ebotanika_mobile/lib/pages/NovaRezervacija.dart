@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:ebotanika_mobile/models/rezervacije.dart';
 import 'package:ebotanika_mobile/models/svrha.dart';
 import 'package:flutter/material.dart';
@@ -8,8 +7,8 @@ import '../models/gradovi.dart';
 import '../services/APIservice.dart';
 
 class NovaRezervacija extends StatefulWidget {
-  final int? biljkaID;
-  const NovaRezervacija({Key? key, this.biljkaID}) : super(key: key);
+  var biljkaID = 0;
+  NovaRezervacija({Key? key, required this.biljkaID}) : super(key: key);
 
   @override
   _NovaRezervacijaState createState() => _NovaRezervacijaState();
@@ -131,7 +130,7 @@ class _NovaRezervacijaState extends State<NovaRezervacija> {
 
                           if (pickedDate != null) {
                             String formattedDate =
-                                DateFormat('dd-MM-yyyy').format(pickedDate);
+                                DateFormat('yyyy-MM-dd').format(pickedDate);
 
                             setState(() {
                               datumRezervacijeController.text = formattedDate;
@@ -182,36 +181,37 @@ class _NovaRezervacijaState extends State<NovaRezervacija> {
                             onPressed: () async {
                               var date = datumRezervacijeController.text;
                               DateTime formatedDate =
-                                  DateFormat('dd-MM-yyyy').parse(date);
-                              var kolicina = int.parse(kolicinaController.text);
+                                  DateFormat('yyyy-MM-dd').parse(date);
                               var svrhaID = _selectedSvrha!.svrhaID;
                               var gradID = _selectedGrad!.gradID;
                               var rezervacija = Rezervacije(
-                                  datumRezervacije: formatedDate,
-                                  korisnikID: APIService.korisnikId,
-                                  gradID: gradID,
-                                  napomena: napomenaController.text,
-                                  kolicina: kolicina,
-                                  svrhaID: svrhaID,
-                                  adresaDostave: adresaDostaveController.text,
-                                  biljkeID: widget.biljkaID);
+                                  KorisnikID: APIService.korisnikId,
+                                  GradID: gradID,
+                                  DatumRezervacije: formatedDate.toString(),
+                                  Napomena: napomenaController.text,
+                                  SvrhaID: svrhaID.toString(),
+                                  AdresaDostave: adresaDostaveController.text,
+                                  Kolicina: kolicinaController.text,
+                                  BiljkeID: widget.biljkaID);
 
-                                  await APIService.post(
-                                    "Rezervacije",
-                                    json.encode(rezervacija.toJson()))
-                                .then((value) {
-                              setState(() {
-                                ScaffoldMessenger.of(context)
-                                    .showSnackBar(const SnackBar(
-                                  content: SizedBox(
-                                      height: 20,
-                                      child: Center(child: Text("Uspješno"))),
-                                  backgroundColor:
-                                      Color.fromARGB(255, 9, 100, 13),
-                                ));
-                              });
-                            });
+                              var result = await APIService.post("Rezervacije",
+                                  json.encode(rezervacija.toJson()));
+
+                              if (result != null) {
+                                setState(() {
+                                  ScaffoldMessenger.of(context)
+                                      .showSnackBar(const SnackBar(
+                                    content: SizedBox(
+                                        height: 20,
+                                        child: Center(
+                                            child: Text("Uspješno poslano."))),
+                                    backgroundColor:
+                                        Color.fromARGB(255, 9, 100, 13),
+                                  ));
+                                });
+                              }
                             },
+                            //},
                             child: const Text('Sačuvaj',
                                 textAlign: TextAlign.center,
                                 style: TextStyle(

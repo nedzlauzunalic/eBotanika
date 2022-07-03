@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import '../models/korisnik.dart';
 import '../services/APIservice.dart';
 
@@ -19,8 +20,6 @@ class _RegistracijaState extends State<Registracija> {
   TextEditingController korisnickoImeController = TextEditingController();
   TextEditingController lozinkaController = TextEditingController();
   TextEditingController lozinkaPotvrdaController = TextEditingController();
-
-  bool visible = false;
 
   @override
   Widget build(BuildContext context) {
@@ -67,8 +66,26 @@ class _RegistracijaState extends State<Registracija> {
             height: 10,
           ),
           TextField(
-              controller: datumRodjenjaController,
-              decoration: const InputDecoration(hintText: 'Datum rođenja')),
+            controller: datumRodjenjaController,
+            decoration: const InputDecoration(hintText: 'Datum rođenja'),
+            readOnly: true,
+            onTap: () async {
+              DateTime? pickedDate = await showDatePicker(
+                  context: context,
+                  initialDate: DateTime.now(),
+                  firstDate: DateTime(1900),
+                  lastDate: DateTime(2101));
+
+              if (pickedDate != null) {
+                String formattedDate =
+                    DateFormat('yyyy-MM-dd').format(pickedDate);
+
+                setState(() {
+                  datumRodjenjaController.text = formattedDate;
+                });
+              }
+            },
+          ),
           const SizedBox(
             height: 10,
           ),
@@ -91,12 +108,14 @@ class _RegistracijaState extends State<Registracija> {
             height: 10,
           ),
           TextField(
+              obscureText: true,
               controller: lozinkaController,
               decoration: const InputDecoration(hintText: 'Password')),
           const SizedBox(
             height: 10,
           ),
           TextField(
+              obscureText: true,
               controller: lozinkaPotvrdaController,
               decoration: const InputDecoration(hintText: 'Password potvrda')),
           const SizedBox(
@@ -111,35 +130,30 @@ class _RegistracijaState extends State<Registracija> {
                   borderRadius: BorderRadius.circular(8)),
               child: TextButton(
                   onPressed: () async {
-                    var request = korisnik(
-                        Ime: imeController.text,
-                        Prezime: prezimeController.text,
-                        DatumRodjenja: datumRodjenjaController.text,
-                        Email: emailController.text,
-                        Telefon: telefonController.text,
-                        KorisnickoIme: korisnickoImeController.text,
-                        Lozinka: lozinkaController.text,
-                        LozinkaPotvrda: lozinkaPotvrdaController.text);
+                    var request = Korisnik(
+                        ime: imeController.text,
+                        prezime: prezimeController.text,
+                        email: emailController.text,
+                        telefon: telefonController.text,
+                        datumRodjenja: datumRodjenjaController.text,
+                        korisnickoIme: korisnickoImeController.text,
+                        lozinka: lozinkaController.text,
+                        lozinkaPotvrda: lozinkaPotvrdaController.text);
 
-                    await APIService.post(
+                    var result = await APIService.post(
                         "Korisnik", json.encode(request.toJson()));
 
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        behavior: SnackBarBehavior.floating,
-                        backgroundColor: Colors.transparent,
-                        elevation: 0,
-                        content: Container(
-                          padding: const EdgeInsets.all(16),
-                          height: 50,
-                          decoration: const BoxDecoration(
-                            color: Colors.blue,
-                            borderRadius: BorderRadius.all(Radius.circular(20)),
-                          ),
-                          child: const Text("Podaci su uspješno sačuvani."),
-                        ),
-                      ),
-                    );
+                    if (result != null) {
+                      setState(() {
+                        ScaffoldMessenger.of(context)
+                            .showSnackBar(const SnackBar(
+                          content: SizedBox(
+                              height: 20,
+                              child: Center(child: Text("Uspješno poslano."))),
+                          backgroundColor: Color.fromARGB(255, 9, 100, 13),
+                        ));
+                      });
+                    }
                   },
                   child: const Text('Sačuvaj',
                       textAlign: TextAlign.center,
@@ -147,22 +161,5 @@ class _RegistracijaState extends State<Registracija> {
         ]),
       )),
     );
-  }
-
-  Future insertNoviKorisnik() async {
-    setState(() {
-      visible = true;
-    });
-
-    String ime = imeController.text;
-    String prezime = prezimeController.text;
-    String datumRodjenja = datumRodjenjaController.text;
-    String email = emailController.text;
-    String telefon = telefonController.text;
-    String korisnickoIme = korisnickoImeController.text;
-    String lozinka = lozinkaController.text;
-    String lozinkaPotvrda = lozinkaPotvrdaController.text;
-
-    //var res = await APIService.post('Korisnik', body:{}, TextEditingController: TextEditingController)
   }
 }

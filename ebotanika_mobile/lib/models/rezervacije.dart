@@ -1,44 +1,44 @@
 class Rezervacije {
-  DateTime datumRezervacije;
-  int? korisnikID;
-  int gradID;
-  String? napomena;
-  int? kolicina;
-  int svrhaID;
-  String? adresaDostave;
-  int? biljkeID;
+  final int KorisnikID;
+  final int GradID;
+  final String DatumRezervacije;
+  final String Napomena;
+  final String SvrhaID;
+  final String AdresaDostave;
+  final String Kolicina;
+  final int BiljkeID;
 
   Rezervacije(
       {
-      required this.datumRezervacije,
-      required this.korisnikID,
-      required this.gradID,
-      required this.napomena,
-      required this.kolicina,
-      required this.svrhaID,
-      required this.adresaDostave,
-      required this.biljkeID});
+      required this.KorisnikID,
+      required this.GradID,
+      required this.DatumRezervacije,
+      required this.Napomena,
+      required this.SvrhaID,
+      required this.AdresaDostave,
+      required this.Kolicina,
+      required this.BiljkeID});
 
   factory Rezervacije.fromJson(Map<String, dynamic> json) {
     return Rezervacije(
-        datumRezervacije: DateTime.parse(json["datumRezervacije"].toString()),
-        korisnikID: json["korisnikID"],
-        gradID: json["gradID"],
-        napomena: json["napomena"],
-        kolicina: json["kolicina"],
-        svrhaID: json["svrhaID"],
-        adresaDostave: json["adresaDostave"],
-        biljkeID: json["biljkaID"]);
+        KorisnikID: json["KorisnikID"],
+        GradID: json["GradID"],
+        DatumRezervacije: json["DatumRezervacije"],
+        Napomena: json["Napomena"],
+        SvrhaID: json["SvrhaID"],
+        AdresaDostave: json["AdresaDostave"],
+        Kolicina: json["Kolicina"],
+        BiljkeID: json["BiljkeID"]);
   }
 
   Map<String, dynamic> toJson() => {
-        "datumRezervacije": datumRezervacije.toIso8601String(),
-        "korisnikID": korisnikID,
-        "gradID": gradID,
-        "napomena": napomena,
-        "kolicina": kolicina,
-        "svrhaID": svrhaID,
-        "adresaDostave": adresaDostave,
-        "biljkeID": biljkeID
+        "KorisnikID": KorisnikID,
+        "GradID": GradID,
+        "DatumRezervacije": DatumRezervacije,
+        "Napomena": Napomena,
+        "SvrhaID": SvrhaID,
+        "AdresaDostave": AdresaDostave,
+        "Kolicina": Kolicina,
+        "BiljkeID": BiljkeID
       };
 }
