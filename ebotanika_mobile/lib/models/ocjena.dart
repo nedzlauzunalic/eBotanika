@@ -1,6 +1,6 @@
 class Ocjena {
   int ocjenaId;
-  int ocjenaUsluge;
+  double ocjenaUsluge;
   int korisnikID;
   int biljkeID;
 

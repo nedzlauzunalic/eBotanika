@@ -11,7 +11,9 @@ class MojeRezervacije extends StatefulWidget {
 }
 
 class _MojeRezervacijeState extends State<MojeRezervacije> {
- @override
+  var ocjena = 0.0;
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
@@ -24,8 +26,8 @@ class _MojeRezervacijeState extends State<MojeRezervacije> {
   Widget bodyWidget() {
     return FutureBuilder<List<RezervacijeList>>(
       future: getRezervacije(),
-      builder:
-          (BuildContext context, AsyncSnapshot<List<RezervacijeList>> snapshot) {
+      builder: (BuildContext context,
+          AsyncSnapshot<List<RezervacijeList>> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(child: Text('Loading..'));
         } else {
@@ -53,7 +55,10 @@ class _MojeRezervacijeState extends State<MojeRezervacije> {
                         children: [
                           const Text(
                             'Datum rezervacije',
-                            style: TextStyle(fontSize: 20, color: Colors.black),
+                            style: TextStyle(
+                                fontSize: 20,
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold),
                           ),
                           const SizedBox(
                             height: 10,
@@ -65,7 +70,9 @@ class _MojeRezervacijeState extends State<MojeRezervacije> {
                                       .format(RezervacijeList.datumRezervacije)
                                       .toString(),
                                   style: const TextStyle(
-                                      fontSize: 15, color: Colors.black))),
+                                      fontSize: 15,
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold))),
                           const Text(
                             'Napomena',
                             style: TextStyle(fontSize: 20, color: Colors.black),
@@ -75,7 +82,12 @@ class _MojeRezervacijeState extends State<MojeRezervacije> {
                           ),
                           SizedBox(
                             height: 35,
-                            child: Text(RezervacijeList.napomena,
+                            child: Text((() {
+                              if (RezervacijeList.napomena == "") {
+                                return "/";
+                              }
+                              return RezervacijeList.napomena;
+                            })(),
                                 style: const TextStyle(
                                     fontSize: 15, color: Colors.black)),
                           ),
@@ -101,7 +113,14 @@ class _MojeRezervacijeState extends State<MojeRezervacije> {
                           ),
                           SizedBox(
                             height: 35,
-                            child: Text(RezervacijeList.svrhaID.toString(),
+                            child: Text((() {
+                              if (RezervacijeList.svrhaID == 1) {
+                                return "Kupovina";
+                              } else if (RezervacijeList.svrhaID == 2) {
+                                return "Uređivanje vrtova/parkova";
+                              }
+                              return "Aranžman";
+                            })(),
                                 style: const TextStyle(
                                     fontSize: 15, color: Colors.black)),
                           ),
@@ -121,7 +140,7 @@ class _MojeRezervacijeState extends State<MojeRezervacije> {
                         ])))));
   }
 
-   Future<List<RezervacijeList>> getRezervacije() async {
+  Future<List<RezervacijeList>> getRezervacije() async {
     var rez = await APIService.getById('Rezervacije', APIService.korisnikId);
     return rez!.map((i) => RezervacijeList.fromJson(i)).toList();
   }
