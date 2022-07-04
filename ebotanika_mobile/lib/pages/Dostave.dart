@@ -22,16 +22,19 @@ class _DostaveState extends State<Dostave> {
   }
 
   Widget bodyWidget() {
-    return FutureBuilder(
-      future: GetDostava(),
-      builder: (BuildContext context, AsyncSnapshot<Dostava> snapshot) {
+    return FutureBuilder<List<Dostava>>(
+      future: getDostava(),
+      builder: (BuildContext context, AsyncSnapshot<List<Dostava>> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(child: Text('Loading..'));
         } else {
           if (snapshot.hasError) {
             return Center(child: Text('Error:${snapshot.error}'));
           } else {
-            return DostavaWidget(snapshot.data);
+            return ListView(
+              children:
+                  snapshot.data!.map((e) => DostavaWidget(e)).toList(),
+            );
           }
         }
       },
@@ -109,8 +112,8 @@ class _DostaveState extends State<Dostave> {
     )));
   }
 
-  Future<Dostava> GetDostava() async {
-    var dostava = await APIService.getById('Dostava', APIService.korisnikId);
-    return Dostava.fromJson(dostava);
+  Future<List<Dostava>> getDostava() async {
+    var dostave = await APIService.getById('Dostava', APIService.korisnikId);
+    return dostave!.map((i) => Dostava.fromJson(i)).toList();
   }
 }

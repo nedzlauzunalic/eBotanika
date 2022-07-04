@@ -9,5 +9,6 @@
         public int SecurityCode { get; set; }
         public int ExpYear { get; set; }
         public int ExpMonth { get; set; }
+        public double Iznos { get; set; }
     }
 }

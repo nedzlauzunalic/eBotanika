@@ -10,6 +10,6 @@ namespace eBotanika.Model
         public string TrenutnaLokacija { get; set; }
         public string Napomena { get; set; }
         public int RezervacijaID { get; set; }
-        public Rezervacije Rezervacije { get; set; }
+        public int KorisnikID { get; set; }
     }
 }

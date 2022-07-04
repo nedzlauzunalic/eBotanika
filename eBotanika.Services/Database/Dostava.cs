@@ -9,5 +9,7 @@
         public string? Napomena { get; set; }
         public int? RezervacijaID { get; set; }
         public Rezervacije? Rezervacije { get; set; }
+        public int? KorisnikID { get; set; }
+        public Korisnik? Korisnik { get; set; }
     }
 }

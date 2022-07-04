@@ -59,7 +59,7 @@ class APIService {
     return null;
   }
 
-  static Future<dynamic> getById(String route, int id) async {
+  static Future<List<dynamic>?> getById(String route, int id) async {
     String baseUrl = "http://10.0.2.2:44363/$route/$id";
 
     final String basicAuth =
@@ -70,7 +70,7 @@ class APIService {
       headers: {HttpHeaders.authorizationHeader: basicAuth},
     );
 
-    if (response.statusCode == 200) return json.decode(response.body);
+    if (response.statusCode == 200) return json.decode(response.body) as List;
 
     return null;
   }

@@ -22,10 +22,10 @@ class _MojeRezervacijeState extends State<MojeRezervacije> {
   }
 
   Widget bodyWidget() {
-    return FutureBuilder<dynamic>(
+    return FutureBuilder<List<RezervacijeList>>(
       future: getRezervacije(),
       builder:
-          (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+          (BuildContext context, AsyncSnapshot<List<RezervacijeList>> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(child: Text('Loading..'));
         } else {
@@ -43,8 +43,8 @@ class _MojeRezervacijeState extends State<MojeRezervacije> {
   }
 
   Widget MojeRezervacijeWidget(RezervacijeList) {
-    return Scaffold(
-        body: Center(
+    return Card(
+        child: Center(
             child: SingleChildScrollView(
                 child: Padding(
                     padding: const EdgeInsets.all(70),
@@ -121,7 +121,7 @@ class _MojeRezervacijeState extends State<MojeRezervacije> {
                         ])))));
   }
 
-   Future<List<dynamic>> getRezervacije() async {
+   Future<List<RezervacijeList>> getRezervacije() async {
     var rez = await APIService.getById('Rezervacije', APIService.korisnikId);
     return rez!.map((i) => RezervacijeList.fromJson(i)).toList();
   }

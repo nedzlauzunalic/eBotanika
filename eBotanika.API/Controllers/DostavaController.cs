@@ -37,7 +37,7 @@ namespace eBotanika.API.Controllers
         }
 
         [HttpGet("{id}")]
-        public Model.Dostava GetById(int id)
+        public List<Model.Dostava> GetById(int id)
         {
             return _service.GetById(id);
         }

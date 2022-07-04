@@ -48,11 +48,11 @@ namespace eBotanika.Services.Dostava
             return _mapper.Map<Model.Dostava>(result);
         }
 
-        public Model.Dostava GetById(int id)
+        public List<Model.Dostava> GetById(int id)
         {
-            var result = _context.Dostava.Find(id);
+            var result = _context.Dostava.Where(x => x.KorisnikID == id).ToList();
 
-            return _mapper.Map<Model.Dostava>(result);
+            return _mapper.Map<List<Model.Dostava>>(result);
         }
 
         public Model.Dostava Delete(int id)

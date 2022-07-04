@@ -10,7 +10,7 @@ namespace eBotanika.Services.Dostava
 
        Model.Dostava Update(int id, DostavaInsertRequest request);
 
-       Model.Dostava GetById(int id);
+       List<Model.Dostava> GetById(int id);
 
        Model.Dostava Delete(int id);
     }

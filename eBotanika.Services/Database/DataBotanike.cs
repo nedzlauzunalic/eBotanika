@@ -265,34 +265,38 @@ namespace eBotanika.Services.Database
                 DatumPreuzimanja = new DateTime(2022, 05, 07),
                 TrenutnaLokacija = "Sremska",
                 Napomena = "Dostava kasni 5min",
-                RezervacijaID = 1
+                RezervacijaID = 1,
+                KorisnikID = 1
             });
             modelBuilder.Entity<Dostava>().HasData(new Dostava()
             {
-                DostavaID = 2,
-                DatumSlanja = new DateTime(2022, 04, 06),
+                DostavaID        = 2,
+                DatumSlanja      = new DateTime(2022, 04, 06),
                 DatumPreuzimanja = new DateTime(2022, 04, 06),
                 TrenutnaLokacija = "Skadarska",
-                Napomena = "",
-                RezervacijaID = 2
+                Napomena         = "",
+                RezervacijaID    = 2,
+                KorisnikID       = 2
             });
             modelBuilder.Entity<Dostava>().HasData(new Dostava()
             {
-                DostavaID = 3,
-                DatumSlanja = new DateTime(2022, 04, 10),
+                DostavaID        = 3,
+                DatumSlanja      = new DateTime(2022, 04, 10),
                 DatumPreuzimanja = new DateTime(2022, 04, 10),
                 TrenutnaLokacija = "Ranka Šipke",
-                Napomena = "",
-                RezervacijaID = 3
+                Napomena         = "",
+                RezervacijaID    = 3,
+                KorisnikID       = 1
             });
             modelBuilder.Entity<Dostava>().HasData(new Dostava()
             {
-                DostavaID = 4,
-                DatumSlanja = new DateTime(2022, 05, 10),
+                DostavaID        = 4,
+                DatumSlanja      = new DateTime(2022, 05, 10),
                 DatumPreuzimanja = new DateTime(2022, 05, 10),
                 TrenutnaLokacija = "Oraščka",
-                Napomena = "",
-                RezervacijaID = 4
+                Napomena         = "",
+                RezervacijaID    = 4,
+                KorisnikID       = 2
             });
             #endregion
 
@@ -335,7 +339,8 @@ namespace eBotanika.Services.Database
                 ExpMonth = 2,
                 ExpYear = 23,
                 KorisnikId = 1,
-                SecurityCode = 123
+                SecurityCode = 123,
+                Iznos = 23
             });
             modelBuilder.Entity<Placanje>().HasData(new Placanje()
             {
@@ -344,7 +349,8 @@ namespace eBotanika.Services.Database
                 ExpMonth = 7,
                 ExpYear = 25,
                 KorisnikId = 2,
-                SecurityCode = 134
+                SecurityCode = 134,
+                Iznos = 89
             });           
             #endregion
         }
