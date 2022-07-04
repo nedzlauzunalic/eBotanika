@@ -1,11 +1,9 @@
 ﻿using eBotanika.Model.Requests.Ocjena;
 using eBotanika.Services.Ocjena;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace eBotanika.API.Controllers
 {
-    [Authorize]
     [Route("[controller]")]
     [ApiController]
     public class OcjenaController : ControllerBase

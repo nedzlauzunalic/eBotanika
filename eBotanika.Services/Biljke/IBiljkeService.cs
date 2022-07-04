@@ -13,5 +13,7 @@ namespace eBotanika.Services.Biljke
         Model.Biljke Update(int id, BiljkeInsertRequest request);
 
         Model.Biljke Delete(int id);
+
+        List<Model.Biljke> Recommend(int id);
     }
 }

@@ -48,5 +48,12 @@ namespace eBotanika.API.Controllers
         {
             return _service.Delete(id);
         }
+
+        [HttpGet("{id}/Recommend")]
+        [AllowAnonymous]
+        public List<Model.Biljke> Recommend(int id)
+        {
+            return _service.Recommend(id);
+        }
     }
 }
