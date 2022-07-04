@@ -1,6 +1,4 @@
-import 'dart:convert';
-
-import 'package:ebotanika_mobile/models/rezervacije.dart';
+import 'package:ebotanika_mobile/models/rezervacijeList.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import '../services/APIservice.dart';
@@ -13,8 +11,7 @@ class MojeRezervacije extends StatefulWidget {
 }
 
 class _MojeRezervacijeState extends State<MojeRezervacije> {
-  late List listaRezervacija;
-
+ @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
@@ -45,7 +42,7 @@ class _MojeRezervacijeState extends State<MojeRezervacije> {
     );
   }
 
-  Widget MojeRezervacijeWidget(Rezervacije) {
+  Widget MojeRezervacijeWidget(RezervacijeList) {
     return Scaffold(
         body: Center(
             child: SingleChildScrollView(
@@ -65,7 +62,7 @@ class _MojeRezervacijeState extends State<MojeRezervacije> {
                               height: 35,
                               child: Text(
                                   DateFormat('dd.MM.yyyy')
-                                      .format(Rezervacije.datumRezervacije)
+                                      .format(RezervacijeList.datumRezervacije)
                                       .toString(),
                                   style: const TextStyle(
                                       fontSize: 15, color: Colors.black))),
@@ -78,7 +75,7 @@ class _MojeRezervacijeState extends State<MojeRezervacije> {
                           ),
                           SizedBox(
                             height: 35,
-                            child: Text(Rezervacije.napomena,
+                            child: Text(RezervacijeList.napomena,
                                 style: const TextStyle(
                                     fontSize: 15, color: Colors.black)),
                           ),
@@ -91,7 +88,7 @@ class _MojeRezervacijeState extends State<MojeRezervacije> {
                           ),
                           SizedBox(
                             height: 35,
-                            child: Text(Rezervacije.kolicina.toString(),
+                            child: Text(RezervacijeList.kolicina,
                                 style: const TextStyle(
                                     fontSize: 15, color: Colors.black)),
                           ),
@@ -104,7 +101,7 @@ class _MojeRezervacijeState extends State<MojeRezervacije> {
                           ),
                           SizedBox(
                             height: 35,
-                            child: Text(Rezervacije.svrhaID.toString(),
+                            child: Text(RezervacijeList.svrhaID.toString(),
                                 style: const TextStyle(
                                     fontSize: 15, color: Colors.black)),
                           ),
@@ -117,20 +114,15 @@ class _MojeRezervacijeState extends State<MojeRezervacije> {
                           ),
                           SizedBox(
                             height: 35,
-                            child: Text(Rezervacije.adresaDostave,
+                            child: Text(RezervacijeList.adresaDostave,
                                 style: const TextStyle(
                                     fontSize: 15, color: Colors.black)),
                           ),
                         ])))));
   }
 
-  Future<List<Rezervacije>?> getRezervacije() async {
-    var rezervacije = await APIService.get('Rezervacije', null);
-    for (var item in rezervacije!) {
-      if (item["korisnikID"] == APIService.korisnikId) {
-        return item!.map((i) => Rezervacije.fromJson(i));
-      }
-    }
-    return null;
+   Future<List<dynamic>> getRezervacije() async {
+    var rez = await APIService.getById('Rezervacije', APIService.korisnikId);
+    return rez!.map((i) => RezervacijeList.fromJson(i)).toList();
   }
 }

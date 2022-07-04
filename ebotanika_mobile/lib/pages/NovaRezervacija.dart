@@ -1,9 +1,9 @@
 import 'dart:convert';
-import 'package:ebotanika_mobile/models/rezervacije.dart';
 import 'package:ebotanika_mobile/models/svrha.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import '../models/gradovi.dart';
+import '../models/rezervacije.dart';
 import '../services/APIservice.dart';
 
 class NovaRezervacija extends StatefulWidget {
