@@ -4,7 +4,6 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
-
 import '../models/placanje.dart';
 import '../services/APIservice.dart';
 
@@ -50,9 +49,9 @@ class _PlacanjaState extends State<Placanja> {
 
   Widget PlacanjeWidget(data) {
     return Scaffold(
-        body: Center(
+        body: SingleChildScrollView(
             child: Padding(
-                padding: const EdgeInsets.all(70),
+                padding: const EdgeInsets.all(100),
                 child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
@@ -86,63 +85,6 @@ class _PlacanjaState extends State<Placanja> {
                             style:
                                 TextStyle(color: Colors.white, fontSize: 16)),
                       ),
-
-                      /* TextField(
-                          controller: brojKarticeController,
-                          decoration:
-                              const InputDecoration(hintText: 'Broj kartice')),
-                      const SizedBox(
-                        height: 35,
-                      ),
-                      TextField(
-                          controller: securityCodeController,
-                          decoration:
-                              const InputDecoration(hintText: 'SecurityCode')),
-                      const SizedBox(
-                        height: 35,
-                      ),
-                      TextField(
-                          controller: brojKarticeController,
-                          decoration:
-                              const InputDecoration(hintText: 'ExpYear')),
-                      const SizedBox(
-                        height: 35,
-                      ),
-                      TextField(
-                          controller: expMonthController,
-                          decoration:
-                              const InputDecoration(hintText: 'ExpMonth')),
-                      const SizedBox(
-                        height: 35,
-                      ),
-                      Container(
-                          padding: const EdgeInsets.all(5),
-                          height: 50,
-                          width: 120,
-                          decoration: BoxDecoration(
-                              color: Colors.green[900],
-                              borderRadius: BorderRadius.circular(8)),
-                          child: TextButton(
-                              onPressed: () async {
-                                /* if (result != null) {
-                                  setState(() {
-                                    ScaffoldMessenger.of(context)
-                                        .showSnackBar(const SnackBar(
-                                      content: SizedBox(
-                                          height: 20,
-                                          child: Center(
-                                              child:
-                                                  Text("Uspješno poslano."))),
-                                      backgroundColor:
-                                          Color.fromARGB(255, 9, 100, 13),
-                                    ));
-                                  });
-                                } */
-                              },
-                              child: const Text('Sačuvaj',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 16)))), */
                     ]))));
   }
 
@@ -163,7 +105,8 @@ class _PlacanjaState extends State<Placanja> {
                   merchantDisplayName: 'eBotanika'))
           .then((value) {});
 
-      await insertUplata(iznos, paymentIntentData!['id'], paymentIntentData!['currency']);
+      await insertUplata(
+          iznos, paymentIntentData!['id'], paymentIntentData!['currency']);
 
       displayPaymentSheet();
     } catch (e, s) {
@@ -197,7 +140,7 @@ class _PlacanjaState extends State<Placanja> {
     var request = Placanje(
       korisnikID: APIService.korisnikId,
       brojTransakcije: brojTransakcije,
-      currency:currency,
+      currency: currency,
       iznos: iznos,
     );
 

@@ -1,17 +1,17 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import '../models/korisnik.dart';
+import '../models/registracija.dart';
 import '../services/APIservice.dart';
 
-class Registracija extends StatefulWidget {
-  const Registracija({Key? key}) : super(key: key);
+class Registracije extends StatefulWidget {
+  const Registracije({Key? key}) : super(key: key);
 
   @override
-  _RegistracijaState createState() => _RegistracijaState();
+  _RegistracijeState createState() => _RegistracijeState();
 }
 
-class _RegistracijaState extends State<Registracija> {
+class _RegistracijeState extends State<Registracije> {
   TextEditingController imeController = TextEditingController();
   TextEditingController prezimeController = TextEditingController();
   TextEditingController datumRodjenjaController = TextEditingController();
@@ -27,22 +27,22 @@ class _RegistracijaState extends State<Registracija> {
   }
 
   Widget bodyWidget() {
-    return FutureBuilder<Korisnik>(
-      builder: (BuildContext context, AsyncSnapshot<Korisnik> snapshot) {
+    return FutureBuilder<Registracija>(
+      builder: (BuildContext context, AsyncSnapshot<Registracija> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(child: Text('Loading..'));
         } else {
           if (snapshot.hasError) {
             return Center(child: Text('Error:${snapshot.error}'));
           } else {
-            return RegistracijaWidget(snapshot.data);
+            return RegistracijeWidget(snapshot.data);
           }
         }
       },
     );
   }
 
-  Widget RegistracijaWidget(korisnik) {
+  Widget RegistracijeWidget(registracija) {
     return Scaffold(
       body: SingleChildScrollView(
           child: Padding(
@@ -133,7 +133,7 @@ class _RegistracijaState extends State<Registracija> {
                     var date = datumRodjenjaController.text;
                               DateTime formatedDate =
                                   DateFormat('yyyy-MM-dd').parse(date);
-                    var request = Korisnik(
+                    var request = Registracija(
                         ime: imeController.text,
                         prezime: prezimeController.text,
                         email: emailController.text,

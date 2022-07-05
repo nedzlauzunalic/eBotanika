@@ -75,6 +75,22 @@ class APIService {
     return null;
   }
 
+  static Future<dynamic> getByIdKorisnik(String route, int id) async {
+    String baseUrl = "http://10.0.2.2:44363/$route/$id";
+
+    final String basicAuth =
+        'Basic ${base64Encode(utf8.encode('$username:$password'))}';
+
+    final response = await http.get(
+      Uri.parse(baseUrl),
+      headers: {HttpHeaders.authorizationHeader: basicAuth},
+    );
+
+    if (response.statusCode == 200) return json.decode(response.body);
+
+    return null;
+  }
+
   static Future<dynamic> post(String route, String body) async {
     String baseUrl = "http://10.0.2.2:44363/$route";
 
@@ -89,7 +105,29 @@ class APIService {
       },
       body: body,
     );
-  
+
+    if (response.statusCode == 200) {
+      return json.decode(response.body.toString());
+    } else {
+      return null;
+    }
+  }
+
+  static Future<dynamic> put(String route, int id, String body) async {
+    String baseUrl = "http://10.0.2.2:44363/$route/$id";
+
+    final String basicAuth =
+        'Basic ${base64Encode(utf8.encode('$username:$password'))}';
+
+    final response = await http.put(
+      Uri.parse(baseUrl),
+      headers: {
+        HttpHeaders.contentTypeHeader: 'application/json; charset=UTF-8',
+        HttpHeaders.authorizationHeader: basicAuth
+      },
+      body: body,
+    );
+
     if (response.statusCode == 200) {
       return json.decode(response.body.toString());
     } else {

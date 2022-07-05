@@ -1,44 +1,35 @@
 class Korisnik {
   String ime;
   String prezime;
+  DateTime datumRodjenja;
   String email;
   String telefon;
-  String datumRodjenja;
   String korisnickoIme;
-  String password;
-  String passwordPotvrda;
 
   Korisnik(
-      {
-      required this.ime,
+      {required this.ime,
       required this.prezime,
+      required this.datumRodjenja,
       required this.email,
       required this.telefon,
-      required this.datumRodjenja,
-      required this.korisnickoIme,
-      required this.password,
-      required this.passwordPotvrda});
+      required this.korisnickoIme});
 
   factory Korisnik.fromJson(Map<String, dynamic> json) {
     return Korisnik(
         ime: json["ime"],
         prezime: json["prezime"],
+        datumRodjenja: DateTime.parse(json["datumRodjenja"].toString()),
         email: json["email"],
         telefon: json["telefon"],
-        datumRodjenja: json["datumRodjenja"],
-        korisnickoIme: json["korisnickoIme"],
-        password: json["password"],
-        passwordPotvrda: json["passwordPotvrda"]);
+        korisnickoIme: json["korisnickoIme"]);
   }
 
   Map<String, dynamic> toJson() => {
         "ime": ime,
         "prezime": prezime,
+        "datumRodjenja": datumRodjenja.toIso8601String(),
         "email": email,
         "telefon": telefon,
-        "datumRodjenja": datumRodjenja,
-        "korisnickoIme": korisnickoIme,
-        "password": password,
-        "passwordPotvrda": passwordPotvrda
+        "korisnickoIme": korisnickoIme
       };
 }

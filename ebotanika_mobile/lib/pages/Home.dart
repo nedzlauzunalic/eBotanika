@@ -49,6 +49,13 @@ class _HomeState extends State<Home> {
                 },
               ),
               ListTile(
+                title: const Text('Profil'),
+                textColor: Colors.white,
+                onTap: () {
+                  Navigator.of(context).pushNamed('/profil');
+                },
+              ),
+              ListTile(
                 title: const Text('Kontakt'),
                 textColor: Colors.white,
                 onTap: () {

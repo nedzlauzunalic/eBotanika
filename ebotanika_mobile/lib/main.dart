@@ -1,5 +1,6 @@
 import 'package:ebotanika_mobile/pages/Kontakt.dart';
-import 'package:ebotanika_mobile/pages/Registracija.dart';
+import 'package:ebotanika_mobile/pages/Profil.dart';
+import 'package:ebotanika_mobile/pages/Registracije.dart';
 import 'package:flutter/material.dart';
 import 'package:ebotanika_mobile/pages/Login.dart';
 import 'package:ebotanika_mobile/pages/Home.dart';
@@ -32,7 +33,8 @@ class MyApp extends StatelessWidget {
         '/placanje': (context) => Placanja(cijena: 0),
         '/dostava': (context) => const Dostave(),
         '/kontakt': (context) => const Kontakt(),
-        '/registracija': (context) => const Registracija()
+        '/registracija': (context) => const Registracije(),
+        '/profil': (context) => const Profil()
       },
     );
   }

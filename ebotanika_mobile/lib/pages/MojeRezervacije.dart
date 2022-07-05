@@ -14,6 +14,7 @@ class MojeRezervacije extends StatefulWidget {
 }
 
 class _MojeRezervacijeState extends State<MojeRezervacije> {
+  var rating = 0.0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -131,8 +132,8 @@ class _MojeRezervacijeState extends State<MojeRezervacije> {
                 style: const TextStyle(fontSize: 15, color: Colors.black)),
           ),
           RatingBar.builder(
-              initialRating: 3,
-              minRating: 1,
+              initialRating: 1,
+              minRating: rating,
               direction: Axis.horizontal,
               allowHalfRating: true,
               itemCount: 5,
@@ -141,7 +142,11 @@ class _MojeRezervacijeState extends State<MojeRezervacije> {
                     Icons.star,
                     color: Colors.amber,
                   ),
+              updateOnDrag: false,
               onRatingUpdate: (rating) async {
+                setState(() {
+                  this.rating = rating;
+                });
                 var request = Ocjena(
                     ocjenaUsluge: rating,
                     korisnikID: APIService.korisnikId,
