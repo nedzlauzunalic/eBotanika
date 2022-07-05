@@ -7,6 +7,7 @@
 ### Mobile app:
  - Username: mobile
  - Pw: test
+ - Broj kartice: 4242 4242 4242 4242
  
 ## Installation
 1. Clone the repo
