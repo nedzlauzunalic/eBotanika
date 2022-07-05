@@ -330,29 +330,6 @@ namespace eBotanika.Services.Database
                 OcjenaUsluge = 4
             });
             #endregion
-
-            #region PLACANJE
-            modelBuilder.Entity<Placanje>().HasData(new Placanje()
-            {
-                PlacanjeID = 1,
-                BrojKartice = 123445677,
-                ExpMonth = 2,
-                ExpYear = 23,
-                KorisnikId = 1,
-                SecurityCode = 123,
-                Iznos = 23
-            });
-            modelBuilder.Entity<Placanje>().HasData(new Placanje()
-            {
-                PlacanjeID = 2,
-                BrojKartice = 987654678,
-                ExpMonth = 7,
-                ExpYear = 25,
-                KorisnikId = 2,
-                SecurityCode = 134,
-                Iznos = 89
-            });           
-            #endregion
         }
     }
 }

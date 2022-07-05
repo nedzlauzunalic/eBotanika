@@ -19,9 +19,9 @@ namespace eBotanika.Services.Placanje
         {
             var query = _context.Set<Database.Placanje>().AsQueryable();
 
-            if (search.BrojKartice != null)
+            if (search.BrojTransakcije != null)
             {
-                query = query.Where(i => i.BrojKartice == search.BrojKartice);
+                query = query.Where(i => i.BrojTransakcije == search.BrojTransakcije);
             }
 
             if (search.KorisnikId != null)

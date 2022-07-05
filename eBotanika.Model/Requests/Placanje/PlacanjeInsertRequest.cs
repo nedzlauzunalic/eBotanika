@@ -3,9 +3,8 @@
     public class PlacanjeInsertRequest
     {
         public int KorisnikId { get; set; }
-        public int BrojKartice { get; set; }
-        public int SecurityCode { get; set; }
-        public int ExpYear { get; set; }
-        public int ExpMonth { get; set; }
+        public string BrojTransakcije { get; set; }
+        public string Currency { get; set; }
+        public double Iznos { get; set; }
     }
 }

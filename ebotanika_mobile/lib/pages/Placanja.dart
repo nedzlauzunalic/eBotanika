@@ -5,6 +5,9 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 
+import '../models/placanje.dart';
+import '../services/APIservice.dart';
+
 class Placanja extends StatefulWidget {
   double cijena = 0;
   Placanja({Key? key, required this.cijena}) : super(key: key);
@@ -68,6 +71,9 @@ class _PlacanjaState extends State<Placanja> {
                       Text(widget.cijena.toString(),
                           style: const TextStyle(
                               fontSize: 15, color: Colors.black)),
+                      const SizedBox(
+                        height: 10,
+                      ),
                       TextButton(
                         onPressed: () async {
                           makePayment(widget.cijena);
@@ -143,7 +149,7 @@ class _PlacanjaState extends State<Placanja> {
   Future<void> makePayment(double iznos) async {
     try {
       paymentIntentData =
-          await createPaymentIntent((200 * 100).round().toString(), 'bam');
+          await createPaymentIntent((iznos * 100).round().toString(), 'bam');
       await Stripe.instance
           .initPaymentSheet(
               paymentSheetParameters: SetupPaymentSheetParameters(
@@ -157,9 +163,8 @@ class _PlacanjaState extends State<Placanja> {
                   merchantDisplayName: 'eBotanika'))
           .then((value) {});
 
-      //await insertUplata(iznos, paymentIntentData!['id']);
+      await insertUplata(iznos, paymentIntentData!['id'], paymentIntentData!['currency']);
 
-      ///now finally display payment sheeet
       displayPaymentSheet();
     } catch (e, s) {
       print('exception:$e$s');
@@ -186,6 +191,17 @@ class _PlacanjaState extends State<Placanja> {
     } catch (err) {
       print('err charging user: ${err.toString()}');
     }
+  }
+
+  insertUplata(double iznos, String brojTransakcije, String currency) async {
+    var request = Placanje(
+      korisnikID: APIService.korisnikId,
+      brojTransakcije: brojTransakcije,
+      currency:currency,
+      iznos: iznos,
+    );
+
+    await APIService.post("Placanje", json.encode(request.toJson()));
   }
 
   displayPaymentSheet() async {

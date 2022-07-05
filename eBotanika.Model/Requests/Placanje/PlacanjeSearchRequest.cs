@@ -3,6 +3,6 @@
     public class PlacanjeSearchRequest
     {
         public int? KorisnikId { get; set; }
-        public int? BrojKartice { get; set; }
+        public string BrojTransakcije { get; set; }
     }
 }

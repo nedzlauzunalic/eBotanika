@@ -1,31 +1,27 @@
 class Placanje {
   int korisnikID;
-  int brojKartice;
-  int securityCode;
-  int expYear;
-  int expMonth;
+  String brojTransakcije;
+  String currency;
+  double iznos;
 
   Placanje(
       {required this.korisnikID,
-      required this.brojKartice,
-      required this.securityCode,
-      required this.expYear,
-      required this.expMonth});
+      required this.brojTransakcije,
+      required this.currency,
+      required this.iznos});
 
   factory Placanje.fromJson(Map<String, dynamic> json) {
     return Placanje(
         korisnikID: json["korisnikID"],
-        brojKartice: json["brojKartice"],
-        securityCode: json["securityCode"],
-        expYear: json["expYear"],
-        expMonth: json["expMonth"]);
+        brojTransakcije: json["brojTransakcije"],
+        currency: json["currency"],
+        iznos: json["iznos"]);
   }
 
   Map<String, dynamic> toJson() => {
         "korisnikID": korisnikID,
-        "brojKartice": brojKartice,
-        "securityCode": securityCode,
-        "expYear": expYear,
-        "expMonth": expMonth
+        "brojTransakcije": brojTransakcije,
+        "currency": currency,
+        "iznos": iznos
       };
 }
