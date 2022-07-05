@@ -139,7 +139,7 @@ namespace eBotanika.Services.Database
                 Naziv = "Petunija",
                 Opis = "Petunija pripada porodici pomoćnica,porijeklom iz Južne Amerike.",
                 Slika = "1.jpg",
-                Cijena = 1
+                Cijena = 100
             });
             modelBuilder.Entity<Biljke>().HasData(new Biljke()
             {
@@ -148,7 +148,7 @@ namespace eBotanika.Services.Database
                 Naziv = "Lavanda ",
                 Opis = "Lavanda cvati u proljeće i u jesen ukoliko se dobro podreže nakon prve cvatnje.",
                 Slika = "2.jpg",
-                Cijena = 3
+                Cijena = 150
             });
             modelBuilder.Entity<Biljke>().HasData(new Biljke()
             {
@@ -157,7 +157,7 @@ namespace eBotanika.Services.Database
                 Naziv = "Kesten",
                 Opis = "Pitomi kesten (Castanea sativa) je listopadno stablo iz porodice bukvi.",
                 Slika = "3.jpg",
-                Cijena = 65
+                Cijena = 270
             });
             modelBuilder.Entity<Biljke>().HasData(new Biljke()
             {
@@ -166,7 +166,7 @@ namespace eBotanika.Services.Database
                 Naziv = "Patuljasta kleka",
                 Opis = "Patuljak smreka je jedna od mnogo varijanti ove zimzelene biljke koja obično raste kao grm.",
                 Slika = "4.jpg",
-                Cijena = 50
+                Cijena = 180
             });
             modelBuilder.Entity<Biljke>().HasData(new Biljke()
             {
@@ -175,7 +175,7 @@ namespace eBotanika.Services.Database
                 Naziv = "Planinski bor",
                 Opis = "Planinski bor, klekovina ili bor krivulj je crnogorična vrsta drveća iz porodice Pinaceae.",
                 Slika = "5.jpg",
-                Cijena = 45
+                Cijena = 138
             });
             #endregion
 

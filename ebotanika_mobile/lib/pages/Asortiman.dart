@@ -88,6 +88,7 @@ class _AsortimanState extends State<Asortiman> {
                   MaterialPageRoute(
                       builder: (context) => NovaRezervacija(
                             biljkaID: Biljke.biljkeID,
+                            cijena: Biljke.cijena
                           )));
             },
             style: ElevatedButton.styleFrom(
@@ -104,5 +105,5 @@ class _AsortimanState extends State<Asortiman> {
   Future<List<Biljke>> getBiljke() async {
     var biljke = await APIService.get('Biljke', null);
     return biljke!.map((i) => Biljke.fromJson(i)).toList();
-  }
+  } 
 }

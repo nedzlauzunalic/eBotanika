@@ -42,13 +42,6 @@ class _HomeState extends State<Home> {
                 },
               ),
               ListTile(
-                title: const Text('Plaćanje'),
-                textColor: Colors.white,
-                onTap: () {
-                  Navigator.of(context).pushNamed('/placanje');
-                },
-              ),
-              ListTile(
                 title: const Text('Dostava'),
                 textColor: Colors.white,
                 onTap: () {

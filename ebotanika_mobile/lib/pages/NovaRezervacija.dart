@@ -1,16 +1,24 @@
 import 'dart:convert';
+import 'dart:io';
 import 'package:ebotanika_mobile/models/svrha.dart';
+import 'package:ebotanika_mobile/pages/Placanja.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import '../models/biljke.dart';
 import '../models/gradovi.dart';
 import '../models/rezervacije.dart';
 import '../services/APIservice.dart';
+// ignore: depend_on_referenced_packages
+import 'package:http/http.dart' as http;
 
+// ignore: must_be_immutable
 class NovaRezervacija extends StatefulWidget {
   var biljkaID = 0;
-  NovaRezervacija({Key? key, required this.biljkaID}) : super(key: key);
+  double cijena = 0;
+  NovaRezervacija({Key? key, required this.biljkaID, required this.cijena}) : super(key: key);
 
   @override
+  // ignore: library_private_types_in_public_api
   _NovaRezervacijaState createState() => _NovaRezervacijaState();
 }
 
@@ -24,6 +32,7 @@ class _NovaRezervacijaState extends State<NovaRezervacija> {
   Svrha? _selectedSvrha;
   List<DropdownMenuItem<Gradovi>> gradovi = [];
   Gradovi? _selectedGrad;
+  int? biljkeID;
 
   @override
   Widget build(BuildContext context) {
@@ -108,14 +117,49 @@ class _NovaRezervacijaState extends State<NovaRezervacija> {
         });
   }
 
+  /* Widget recommendedBiljkeWidget() {
+    return FutureBuilder<List<dynamic>?>(
+      future: getRecommendedBiljke(biljkeID!),
+      builder: (BuildContext context, AsyncSnapshot<List<dynamic>?> snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(child: Text('Loading..'));
+        } else {
+          if (snapshot.hasError) {
+            return Center(child: Text('Error:${snapshot.error}'));
+          } else {
+            return ListView(
+              children: snapshot.data!.map((e) => NovaRezervacijaWidget(e)).toList(),
+            );
+          }
+        }
+      },
+    );
+  } */
+
   Widget NovaRezervacijaWidget(biljka) {
     return Scaffold(
         body: SingleChildScrollView(
             child: Padding(
-                padding: const EdgeInsets.all(70),
+                padding: const EdgeInsets.all(30),
                 child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
+                      Padding(
+                        padding: const EdgeInsets.all(5),
+                        child: ElevatedButton(
+                          onPressed: () {
+                            getRecommendedBiljke(widget.biljkaID);
+                          },
+                          style: ElevatedButton.styleFrom(
+                              primary: Colors.green[900],
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 20, vertical: 5)),
+                          child: const Text('Pogledaj preporučeno...'),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 35,
+                      ),
                       TextField(
                         controller: datumRezervacijeController,
                         decoration: const InputDecoration(
@@ -172,50 +216,68 @@ class _NovaRezervacijaState extends State<NovaRezervacija> {
                       ),
                       Container(
                         padding: const EdgeInsets.all(5),
-                        height: 50,
+                        height: 45,
                         width: 120,
                         decoration: BoxDecoration(
                             color: Colors.green[900],
                             borderRadius: BorderRadius.circular(8)),
                         child: TextButton(
-                            onPressed: () async {
-                              var date = datumRezervacijeController.text;
-                              DateTime formatedDate =
-                                  DateFormat('yyyy-MM-dd').parse(date);
-                              var svrhaID = _selectedSvrha!.svrhaID;
-                              var gradID = _selectedGrad!.gradID;
-                              var rezervacija = Rezervacije(
-                                  KorisnikID: APIService.korisnikId,
-                                  GradID: gradID,
-                                  DatumRezervacije: formatedDate.toString(),
-                                  Napomena: napomenaController.text,
-                                  SvrhaID: svrhaID.toString(),
-                                  AdresaDostave: adresaDostaveController.text,
-                                  Kolicina: kolicinaController.text,
-                                  BiljkeID: widget.biljkaID);
+                          onPressed: () async {
+                            var date = datumRezervacijeController.text;
+                            DateTime formatedDate =
+                                DateFormat('yyyy-MM-dd').parse(date);
+                            var svrhaID = _selectedSvrha!.svrhaID;
+                            var gradID = _selectedGrad!.gradID;
+                            var rezervacija = Rezervacije(
+                                KorisnikID: APIService.korisnikId,
+                                GradID: gradID,
+                                DatumRezervacije: formatedDate.toString(),
+                                Napomena: napomenaController.text,
+                                SvrhaID: svrhaID.toString(),
+                                AdresaDostave: adresaDostaveController.text,
+                                Kolicina: kolicinaController.text,
+                                BiljkeID: widget.biljkaID);
 
-                              var result = await APIService.post("Rezervacije",
-                                  json.encode(rezervacija.toJson()));
+                            var result = await APIService.post("Rezervacije",
+                                json.encode(rezervacija.toJson()));
 
-                              if (result != null) {
-                                setState(() {
-                                  ScaffoldMessenger.of(context)
-                                      .showSnackBar(const SnackBar(
-                                    content: SizedBox(
-                                        height: 20,
-                                        child: Center(
-                                            child: Text("Uspješno poslano."))),
-                                    backgroundColor:
-                                        Color.fromARGB(255, 9, 100, 13),
-                                  ));
-                                });
-                              }
-                            },
-                            //},
-                            child: const Text('Sačuvaj',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 16))),
+                            if (result != null) {
+                              setState(() {
+                                ScaffoldMessenger.of(context)
+                                    .showSnackBar(const SnackBar(
+                                  content: SizedBox(
+                                      height: 20,
+                                      child: Center(
+                                          child: Text("Uspješno poslano."))),
+                                  backgroundColor:
+                                      Color.fromARGB(255, 9, 100, 13),
+                                ));
+                              });
+                            }
+                          },
+                          child: const Text('Sačuvaj',
+                              textAlign: TextAlign.center,
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 16)),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(5),
+                        child: ElevatedButton(
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Placanja(
+                                          cijena: widget.cijena
+                                        )));
+                          },
+                          style: ElevatedButton.styleFrom(
+                              primary: Colors.green[900],
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 20, vertical: 10)),
+                          child: const Text('Definiši plaćanje'),
+                        ),
                       )
                     ]))));
   }
@@ -258,5 +320,24 @@ class _NovaRezervacijaState extends State<NovaRezervacija> {
     }
 
     return gradoviLista;
+  }
+
+  Future<List?> getRecommendedBiljke(int biljkaID) async {
+    String? username = APIService.username;
+    String? password = APIService.password;
+    String baseUrl = "http://10.0.2.2:44363/Biljke/$biljkaID/Recommend";
+
+    final String basicAuth =
+        'Basic ${base64Encode(utf8.encode('$username:$password'))}';
+
+    final response = await http.get(Uri.parse(baseUrl),
+        headers: {HttpHeaders.authorizationHeader: basicAuth});
+
+    if (response.statusCode == 200) {
+      var res = json.decode(response.body) as List;
+      return res.map((i) => Biljke.fromJson(i)).toList();
+    }
+
+    return null;
   }
 }
