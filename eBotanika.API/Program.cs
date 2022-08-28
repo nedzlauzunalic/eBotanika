@@ -11,6 +11,8 @@ using eBotanika.Services.Placanje;
 using eBotanika.Services.Rezervacije;
 using eBotanika.Services.Svrha;
 using eBotanika.Services.Uloge;
+using eBotanika.Services.UposlenikUloge;
+
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
@@ -19,7 +21,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddNewtonsoftJson(options =>
+    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -54,6 +57,7 @@ builder.Services.AddTransient<ISvrhaService, SvrhaService>();
 builder.Services.AddTransient<IDostavaService, DostavaService>();
 builder.Services.AddTransient<IPlacanjeService, PlacanjeService>();
 builder.Services.AddTransient<IRezervacijeService, RezervacijeService>();
+builder.Services.AddTransient<IUposlenikUlogeService, UposlenikUlogeService>();
 
 builder.Services.AddAutoMapper(typeof(IKorisnikService));
 

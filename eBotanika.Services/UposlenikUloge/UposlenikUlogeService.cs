@@ -3,17 +3,21 @@ using eBotanika.Services.Database;
 
 namespace eBotanika.Services.UposlenikUloge
 {
-    public class UposlenikUlogeService : BaseService<Model.UposlenikUloge, object, Database.UposlenikUloge>
+    public class UposlenikUlogeService : IUposlenikUlogeService
     {
-        public UposlenikUlogeService(eBotanikaContext context, IMapper mapper) : base(context, mapper)
+        private readonly eBotanikaContext _context;
+        private readonly IMapper  _mapper;
+        public UposlenikUlogeService(eBotanikaContext context, IMapper mapper)
         {
+            _context = context;
+            _mapper  = mapper;
         }
 
-        public override List<Model.UposlenikUloge> Get(object search)
+        public Model.UposlenikUloge GetById(int id)
         {
-            var list = _context.UposlenikUloge.ToList();
+            var entity = _context.UposlenikUloge.Find(id);
 
-            return _mapper.Map<List<Model.UposlenikUloge>>(list);
+            return _mapper.Map<Model.UposlenikUloge>(entity);
         }
     }
 }

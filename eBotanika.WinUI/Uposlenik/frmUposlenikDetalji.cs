@@ -11,6 +11,7 @@ namespace eBotanika.WinUI.Uposlenik
     {
         APIService _uposlenikService = new APIService("Uposlenik");
         APIService _ulogeService = new APIService("Uloge");
+        APIService   _uposlenikUlogeService = new APIService("UposlenikUloge");
         private int? _id = null;
 
         public frmUposlenikDetalji(int? id = null)
@@ -28,7 +29,7 @@ namespace eBotanika.WinUI.Uposlenik
                 var checkedBoxUloge = checkedListBoxUloge.CheckedItems.Cast<Model.Uloge>().ToList();
                 var roleIdList = checkedBoxUloge.Select(x => x.UlogaID).ToList();
 
-                UposlenikInsertRequest insertRequest = new UposlenikInsertRequest()
+                UposlenikInsertRequest insertRequest = new UposlenikInsertRequest
                 {
                         Ime = txtIme.Text,
                         Prezime = txtPrezime.Text,
@@ -42,11 +43,11 @@ namespace eBotanika.WinUI.Uposlenik
 
                 var uposlenik = await _uposlenikService.Insert<Model.Uposlenik>(insertRequest);
                 MessageBox.Show("Podaci uspješno sačuvani.", "Informacija");
-                }
-                else
-                {
-                    UposlenikUpdateRequest updateRequest = new UposlenikUpdateRequest()
-                    {
+              }
+              else
+              { 
+                  UposlenikUpdateRequest updateRequest = new UposlenikUpdateRequest
+                  {
                         Ime = txtIme.Text,
                         Prezime = txtPrezime.Text,
                         Telefon = txtTelefon.Text,
@@ -54,11 +55,11 @@ namespace eBotanika.WinUI.Uposlenik
                         Email = txtEmail.Text,
                         Password = txtPassword.Text,
                         PasswordPotvrda = txtPotvrdaPass.Text
-                    };
+                  };
 
                  var uposlenik = await _uposlenikService.Update<Model.Uposlenik>(_id.Value, updateRequest);
                  MessageBox.Show("Podaci uspješno izmjenjeni.", "Informacija");
-                }
+              }
             }
         }
 
