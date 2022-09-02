@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using eBotanika.Services.Database;
 
@@ -11,9 +12,10 @@ using eBotanika.Services.Database;
 namespace eBotanika.Services.Migrations
 {
     [DbContext(typeof(eBotanikaContext))]
-    partial class eBotanikaContextModelSnapshot : ModelSnapshot
+    [Migration("20220828143557_biljkeUpdate")]
+    partial class biljkeUpdate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -350,7 +352,7 @@ namespace eBotanika.Services.Migrations
                         new
                         {
                             KorisnikID = 1,
-                            DatumRodjenja = new DateTime(2022, 8, 30, 12, 12, 40, 529, DateTimeKind.Local).AddTicks(5409),
+                            DatumRodjenja = new DateTime(2022, 8, 28, 16, 35, 57, 331, DateTimeKind.Local).AddTicks(6595),
                             Email = "korisnik@live.com",
                             Ime = "Mobile",
                             KorisnickoIme = "mobile",
@@ -362,7 +364,7 @@ namespace eBotanika.Services.Migrations
                         new
                         {
                             KorisnikID = 2,
-                            DatumRodjenja = new DateTime(2022, 8, 30, 12, 12, 40, 529, DateTimeKind.Local).AddTicks(5444),
+                            DatumRodjenja = new DateTime(2022, 8, 28, 16, 35, 57, 331, DateTimeKind.Local).AddTicks(6657),
                             Email = "adnan@live.com",
                             Ime = "Adnan",
                             KorisnickoIme = "adnan",
@@ -676,16 +678,11 @@ namespace eBotanika.Services.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<int>("UlogaID")
-                        .HasColumnType("int");
-
                     b.HasKey("UposlenikID");
 
                     b.HasIndex("Email")
                         .IsUnique()
                         .HasDatabaseName("Korisnik_Email");
-
-                    b.HasIndex("UlogaID");
 
                     b.ToTable("Uposlenik");
 
@@ -699,8 +696,7 @@ namespace eBotanika.Services.Migrations
                             LozinkaHash = "bUBHhasx3aUpr7cmjozMzIeL35c=",
                             LozinkaSalt = "zthomrUyhZjeapvj5KYL+A==",
                             Prezime = "Admin",
-                            Telefon = "+38762123456",
-                            UlogaID = 1
+                            Telefon = "+38762123456"
                         },
                         new
                         {
@@ -711,8 +707,52 @@ namespace eBotanika.Services.Migrations
                             LozinkaHash = "ctdN66Ftv+YJP9LAK6i3dKDqchg=",
                             LozinkaSalt = "NSqADQ/R7xKWHlTVz2BMwg==",
                             Prezime = "Radnik1",
-                            Telefon = "+38762345678",
-                            UlogaID = 2
+                            Telefon = "+38762345678"
+                        });
+                });
+
+            modelBuilder.Entity("eBotanika.Services.Database.UposlenikUloge", b =>
+                {
+                    b.Property<int>("UposlenikUlogeID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("UposlenikUlogeID");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UposlenikUlogeID"), 1L, 1);
+
+                    b.Property<DateTime>("DatumIzmjene")
+                        .HasColumnType("datetime");
+
+                    b.Property<int>("UlogaID")
+                        .HasColumnType("int")
+                        .HasColumnName("UlogaID");
+
+                    b.Property<int>("UposlenikID")
+                        .HasColumnType("int")
+                        .HasColumnName("UposlenikID");
+
+                    b.HasKey("UposlenikUlogeID");
+
+                    b.HasIndex("UlogaID");
+
+                    b.HasIndex("UposlenikID");
+
+                    b.ToTable("UposlenikUloge");
+
+                    b.HasData(
+                        new
+                        {
+                            UposlenikUlogeID = 1,
+                            DatumIzmjene = new DateTime(2020, 6, 13, 20, 10, 26, 966, DateTimeKind.Local),
+                            UlogaID = 1,
+                            UposlenikID = 1
+                        },
+                        new
+                        {
+                            UposlenikUlogeID = 2,
+                            DatumIzmjene = new DateTime(2020, 6, 13, 20, 10, 26, 966, DateTimeKind.Local),
+                            UlogaID = 2,
+                            UposlenikID = 2
                         });
                 });
 
@@ -816,15 +856,23 @@ namespace eBotanika.Services.Migrations
                     b.Navigation("Svrha");
                 });
 
-            modelBuilder.Entity("eBotanika.Services.Database.Uposlenik", b =>
+            modelBuilder.Entity("eBotanika.Services.Database.UposlenikUloge", b =>
                 {
-                    b.HasOne("eBotanika.Services.Database.Uloge", "Uloge")
-                        .WithMany("Uposlenik")
+                    b.HasOne("eBotanika.Services.Database.Uloge", "Uloga")
+                        .WithMany("UposlenikUloge")
                         .HasForeignKey("UlogaID")
                         .IsRequired()
-                        .HasConstraintName("FK_Uposlenik_Uloge");
+                        .HasConstraintName("FK_UposlenikUloge_Uloga");
 
-                    b.Navigation("Uloge");
+                    b.HasOne("eBotanika.Services.Database.Uposlenik", "Uposlenik")
+                        .WithMany("UposlenikUloge")
+                        .HasForeignKey("UposlenikID")
+                        .IsRequired()
+                        .HasConstraintName("FK_UposlenikUloge_Uposlenik");
+
+                    b.Navigation("Uloga");
+
+                    b.Navigation("Uposlenik");
                 });
 
             modelBuilder.Entity("eBotanika.Services.Database.Biljke", b =>
@@ -865,12 +913,14 @@ namespace eBotanika.Services.Migrations
 
             modelBuilder.Entity("eBotanika.Services.Database.Uloge", b =>
                 {
-                    b.Navigation("Uposlenik");
+                    b.Navigation("UposlenikUloge");
                 });
 
             modelBuilder.Entity("eBotanika.Services.Database.Uposlenik", b =>
                 {
                     b.Navigation("Biljke");
+
+                    b.Navigation("UposlenikUloge");
                 });
 #pragma warning restore 612, 618
         }

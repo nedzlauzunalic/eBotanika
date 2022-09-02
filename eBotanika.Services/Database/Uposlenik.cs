@@ -4,7 +4,7 @@
     {
         public Uposlenik()
         {
-            UposlenikUloge = new HashSet<UposlenikUloge>();
+            Biljke = new HashSet<Biljke>();
         }
 
         public int UposlenikID { get; set; }
@@ -15,6 +15,8 @@
         public string KorisnickoIme { get; set; }
         public string LozinkaHash { get; set; }
         public string LozinkaSalt { get; set; }
-        public virtual ICollection<UposlenikUloge> UposlenikUloge { get; set; }
+        public int UlogaID { get; set; }
+        public virtual Uloge Uloge { get; set; }
+        public virtual ICollection<Biljke> Biljke { get; set; }
     }
 }

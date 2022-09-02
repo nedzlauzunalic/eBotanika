@@ -18,13 +18,39 @@ namespace eBotanika.WinUI.Rezervacije
         
         public frmRezervacije(int? id = null)
         {
-            _id = id;
             InitializeComponent();
+            _id = id;
+        }
+
+        private async void frmLoadAsync(object sender, EventArgs e)
+        {
+            await LoadSvrha();
+            await LoadKorisnik();
+            await LoadGrad();
+            await LoadBiljke();
+
+            if (_id.HasValue)
+            { 
+                var entity   = await _apiService.GetById<Model.Rezervacije>(_id);
+                var biljka   = await _biljkeService.GetById<Model.Biljke>(entity.BiljkeID);
+                var grad     = await _gradoviService.GetById<Model.Gradovi>(entity.GradID);
+                var korisnik = await _korisnikService.GetById<Model.Korisnik>(entity.KorisnikID);
+                var svrha = await _svrhaService.GetById<Model.Svrha>(entity.SvrhaID);
+
+                txtAdresaDostave.Text = entity.AdresaDostave;
+                txtDatumRezervacije.Text = entity.DatumRezervacije;
+                txtKolicina.Text = entity.Kolicina;
+                txtNapomena.Text = entity.Napomena;
+                comboBoxBiljke.SelectedIndex = comboBoxBiljke.FindString(biljka.Naziv);
+                comboBoxGrad.SelectedIndex = comboBoxGrad.FindString(grad.Naziv);
+                comboBoxKorisnik.SelectedIndex = comboBoxKorisnik.FindString(korisnik.Ime);
+                comboBoxSvrha.SelectedIndex = comboBoxSvrha.FindString(svrha.Naziv);
+            }
         }
 
         private async void btnRezervisi_Click(object sender, EventArgs e)
         {
-            RezervacijeInsertRequest insertRequest = new RezervacijeInsertRequest()
+            RezervacijeInsertRequest insertRequest = new RezervacijeInsertRequest
             {
                 DatumRezervacije = txtDatumRezervacije.Text,
                 SvrhaID = comboBoxSvrha.SelectedValue.ToString(),
@@ -54,7 +80,7 @@ namespace eBotanika.WinUI.Rezervacije
             var result = await _korisnikService.Get<List<Model.Korisnik>>();
 
             comboBoxKorisnik.DataSource = result;
-            comboBoxKorisnik.DisplayMember = "Naziv";
+            comboBoxKorisnik.DisplayMember = "Ime";
             comboBoxKorisnik.ValueMember = "KorisnikID";
         }
 
@@ -80,7 +106,7 @@ namespace eBotanika.WinUI.Rezervacije
         {
             if (!Regex.IsMatch(txtDatumRezervacije.Text, @"^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$"))
             {
-                errorProvider.SetError(txtDatumRezervacije, "Format datuma nije ispravan.");
+                errorProvider.SetError(txtDatumRezervacije, "Format datuma nije ispravan. Mora biti yyyy-mm-dd.");
                 txtDatumRezervacije.Focus();
                 e.Cancel = true;
             }
@@ -88,44 +114,6 @@ namespace eBotanika.WinUI.Rezervacije
             {
                 e.Cancel = false;
                 errorProvider.SetError(txtDatumRezervacije, "");
-            }
-        }
-
-        private void comboBoxSvrha_Validate(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            if (string.IsNullOrWhiteSpace(comboBoxSvrha.Text))
-            {
-                e.Cancel = true;
-                comboBoxSvrha.Focus();
-                errorProvider.SetError(comboBoxSvrha, "Svrha je obavezna!");
-            }
-            else
-            {
-                e.Cancel = false;
-                errorProvider.SetError(comboBoxSvrha, "");
-            }
-        }
-
-        private void frmLoadAsync(object sender, EventArgs e)
-        {
-            LoadSvrha();
-            LoadKorisnik();
-            LoadGrad();
-            LoadBiljke();
-        }
-
-        private void txtKolicina_Validating(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            if (!Regex.IsMatch(txtKolicina.Text, @"[0-9]$"))
-            {
-                e.Cancel = true;
-                txtKolicina.Focus();
-                errorProvider.SetError(txtKolicina, "Samo brojevi dozvoljeni.");
-            }
-            else
-            {
-                e.Cancel = false;
-                errorProvider.SetError(txtKolicina, "");
             }
         }
     }

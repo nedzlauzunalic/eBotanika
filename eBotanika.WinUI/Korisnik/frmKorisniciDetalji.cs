@@ -105,7 +105,7 @@ namespace eBotanika.WinUI.Korisnik
         {
             if (!Regex.IsMatch(txtEmail.Text, @"^[A-Za-z0-9+_.-]+@(.+)$"))
             {
-                errorProvider.SetError(txtEmail, "Format e-maila nije ispravan.");
+                errorProvider.SetError(txtEmail, "Format e-maila nije ispravan. Mora biti test@live.com.");
                 txtEmail.Focus();
                 e.Cancel = true;
             }
@@ -120,7 +120,7 @@ namespace eBotanika.WinUI.Korisnik
         {
             if (!Regex.IsMatch(txtDatumRodjenja.Text, @"^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$"))
             {
-                errorProvider.SetError(txtDatumRodjenja, "Format datuma nije ispravan.");
+                errorProvider.SetError(txtDatumRodjenja, "Format datuma nije ispravan. Mora biti yyyy-mm-dd.");
                 txtDatumRodjenja.Focus();
                 e.Cancel = true;
             }
@@ -135,7 +135,7 @@ namespace eBotanika.WinUI.Korisnik
         {
             if (!Regex.IsMatch(txtTelefon.Text, @"^([0-9]{3})-([0-9]{3})-([0-9]{3})$"))
             {
-                errorProvider.SetError(txtTelefon, "Format telefona nije ispravan.");
+                errorProvider.SetError(txtTelefon, "Format telefona nije ispravan. Mora biti 123-456-789");
                 txtTelefon.Focus();
                 e.Cancel = true;
             }
@@ -158,6 +158,34 @@ namespace eBotanika.WinUI.Korisnik
             {
                 e.Cancel = false;
                 errorProvider.SetError(txtKorisnickoIme, "");
+            }
+        }
+
+        private void txtLozinkaValidate(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtPassword.Text) || string.IsNullOrEmpty(txtPassword.Text))
+            {
+                e.Cancel = true;
+                errorProvider.SetError(txtPassword, "Obavezno polje!");
+            }
+            else
+            {
+                e.Cancel = false;
+                errorProvider.SetError(txtPassword, null);
+            }
+        }
+
+        private void txtLozinkaPotvrdaValidate(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtPotvrdaPass.Text) || string.IsNullOrEmpty(txtPotvrdaPass.Text))
+            {
+                e.Cancel = true;
+                errorProvider.SetError(txtPotvrdaPass, "Obavezno polje!");
+            }
+            else
+            {
+                e.Cancel = false;
+                errorProvider.SetError(txtPotvrdaPass, null);
             }
         }
     }

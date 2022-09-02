@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace eBotanika.Model
+﻿namespace eBotanika.Model
 {
     public class Uposlenik
     {
@@ -10,6 +8,6 @@ namespace eBotanika.Model
         public string Email { get; set; }
         public string Telefon { get; set; }
         public string KorisnickoIme { get; set; }
-        public ICollection<UposlenikUloge> UposlenikUloge { get; set; }
+        public int UlogaID { get; set; }
     }
 }

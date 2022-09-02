@@ -1,11 +1,9 @@
-﻿using System;
-
-namespace eBotanika.Model
+﻿namespace eBotanika.Model
 {
     public class Rezervacije
     {
         public int RezervacijaID { get; set; }
-        public DateTime DatumRezervacije { get; set; }
+        public string DatumRezervacije { get; set; }
         public int KorisnikID { get; set; }
         public int GradID { get; set; }
         public string Napomena { get; set; }

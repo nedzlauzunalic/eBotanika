@@ -4,11 +4,10 @@
     {
         public Uloge()
         {
-            UposlenikUloge = new HashSet<UposlenikUloge>();
+            Uposlenik = new HashSet<Uposlenik>();
         }
-
         public int UlogaID { get; set; }
         public string Naziv { get; set; }
-        public ICollection<UposlenikUloge> UposlenikUloge { get; set; }
+        public virtual ICollection<Uposlenik> Uposlenik { get; set; }
     }
 }

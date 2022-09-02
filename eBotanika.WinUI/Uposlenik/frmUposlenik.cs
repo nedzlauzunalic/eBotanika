@@ -19,7 +19,7 @@ namespace eBotanika.WinUI.Uposlenik
             var search = new UposlenikSearchRequest()
             {
                 Ime = txtIme.Text,
-                Prezime=txtPrezime.Text
+                Prezime = txtPrezime.Text
             };
 
             var list = await _apiService.Get<List<Model.Uposlenik>>(search);

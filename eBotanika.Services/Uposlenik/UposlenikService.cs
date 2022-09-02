@@ -95,16 +95,6 @@ namespace eBotanika.Services
             _context.Uposlenik.Add(entity);
             _context.SaveChanges();
 
-            foreach (var uloga in request.Uloge)
-            {
-                Database.UposlenikUloge uposlenikUloge = new Database.UposlenikUloge();
-                uposlenikUloge.UposlenikID = entity.UposlenikID;
-                uposlenikUloge.UlogaID = uloga;
-                uposlenikUloge.DatumIzmjene = DateTime.Now;
-                _context.UposlenikUloge.Add(uposlenikUloge);
-            }
-            _context.SaveChanges();
-
             return _mapper.Map<Model.Uposlenik>(entity);
         }
 

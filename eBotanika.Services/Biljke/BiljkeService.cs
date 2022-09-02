@@ -1,8 +1,6 @@
 ﻿using AutoMapper;
 using eBotanika.Model.Requests.Biljke;
 using eBotanika.Services.Database;
-
-using Microsoft.EntityFrameworkCore;
 using Microsoft.ML;
 using Microsoft.ML.Data;
 using Microsoft.ML.Trainers;

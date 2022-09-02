@@ -55,11 +55,6 @@ namespace eBotanika.API.Security
                 new Claim(ClaimTypes.Name, user.Ime)
                 };
 
-                foreach (var role in user.UposlenikUloge)
-                {
-                    claims.Add(new Claim(ClaimTypes.Role, role.Uloga.Naziv));
-                }
-
                 var identity = new ClaimsIdentity(claims, Scheme.Name);
                 var principal = new ClaimsPrincipal(identity);
                 var ticket = new AuthenticationTicket(principal, Scheme.Name);

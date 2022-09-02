@@ -9,5 +9,6 @@
         public string Opis { get; set; }
         public string Slika { get; set; }
         public decimal Cijena { get; set; }
+        public int UposlenikID { get; set; }
     }
 }

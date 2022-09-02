@@ -7,5 +7,6 @@
         public string Slika { get; set; }
         public string Cijena { get; set; }
         public string KategorijaID { get; set; }
+        public string UposlenikID { get; set; }
     }
 }

@@ -6,6 +6,7 @@
         public string DatumPreuzimanja { get; set; }
         public string TrenutnaLokacija { get; set; }
         public string Napomena { get; set; }
-        public int RezervacijaID { get; set; }
+        public string RezervacijaID { get; set; }
+        public string KorisnikID { get; set; }
     }
 }

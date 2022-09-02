@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace eBotanika.Model.Requests.Uposlenik
+﻿namespace eBotanika.Model.Requests.Uposlenik
 {
     public class UposlenikInsertRequest
     {
@@ -11,6 +9,6 @@ namespace eBotanika.Model.Requests.Uposlenik
         public string KorisnickoIme { get; set; }
         public string Password { get; set; }
         public string PasswordPotvrda { get; set; }
-        public List<int> Uloge { get; set; } = new List<int> { };
+        public string UlogaID { get; set; }
     }
 }

@@ -41,8 +41,6 @@ namespace eBotanika.Services.Mapper
             CreateMap<Database.Ocjena, Model.Requests.Ocjena.OcjenaInsertRequest>().ReverseMap();
             CreateMap<Database.Ocjena, Model.Requests.Ocjena.OcjenaSearchRequest>().ReverseMap();
 
-            CreateMap<Database.UposlenikUloge, Model.UposlenikUloge>();
-
             CreateMap<Database.Uloge, Model.Uloge>();
             CreateMap<Database.Uloge, Model.Requests.Uloge.UlogeSearchRequest>().ReverseMap();
 

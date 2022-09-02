@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using eBotanika.Services.Database;
 
@@ -11,9 +12,10 @@ using eBotanika.Services.Database;
 namespace eBotanika.Services.Migrations
 {
     [DbContext(typeof(eBotanikaContext))]
-    partial class eBotanikaContextModelSnapshot : ModelSnapshot
+    [Migration("20220830093830_rolesmanydeleted")]
+    partial class rolesmanydeleted
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -350,7 +352,7 @@ namespace eBotanika.Services.Migrations
                         new
                         {
                             KorisnikID = 1,
-                            DatumRodjenja = new DateTime(2022, 8, 30, 12, 12, 40, 529, DateTimeKind.Local).AddTicks(5409),
+                            DatumRodjenja = new DateTime(2022, 8, 30, 11, 38, 29, 536, DateTimeKind.Local).AddTicks(3565),
                             Email = "korisnik@live.com",
                             Ime = "Mobile",
                             KorisnickoIme = "mobile",
@@ -362,7 +364,7 @@ namespace eBotanika.Services.Migrations
                         new
                         {
                             KorisnikID = 2,
-                            DatumRodjenja = new DateTime(2022, 8, 30, 12, 12, 40, 529, DateTimeKind.Local).AddTicks(5444),
+                            DatumRodjenja = new DateTime(2022, 8, 30, 11, 38, 29, 536, DateTimeKind.Local).AddTicks(3604),
                             Email = "adnan@live.com",
                             Ime = "Adnan",
                             KorisnickoIme = "adnan",
@@ -676,16 +678,11 @@ namespace eBotanika.Services.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<int>("UlogaID")
-                        .HasColumnType("int");
-
                     b.HasKey("UposlenikID");
 
                     b.HasIndex("Email")
                         .IsUnique()
                         .HasDatabaseName("Korisnik_Email");
-
-                    b.HasIndex("UlogaID");
 
                     b.ToTable("Uposlenik");
 
@@ -699,8 +696,7 @@ namespace eBotanika.Services.Migrations
                             LozinkaHash = "bUBHhasx3aUpr7cmjozMzIeL35c=",
                             LozinkaSalt = "zthomrUyhZjeapvj5KYL+A==",
                             Prezime = "Admin",
-                            Telefon = "+38762123456",
-                            UlogaID = 1
+                            Telefon = "+38762123456"
                         },
                         new
                         {
@@ -711,8 +707,7 @@ namespace eBotanika.Services.Migrations
                             LozinkaHash = "ctdN66Ftv+YJP9LAK6i3dKDqchg=",
                             LozinkaSalt = "NSqADQ/R7xKWHlTVz2BMwg==",
                             Prezime = "Radnik1",
-                            Telefon = "+38762345678",
-                            UlogaID = 2
+                            Telefon = "+38762345678"
                         });
                 });
 
@@ -816,17 +811,6 @@ namespace eBotanika.Services.Migrations
                     b.Navigation("Svrha");
                 });
 
-            modelBuilder.Entity("eBotanika.Services.Database.Uposlenik", b =>
-                {
-                    b.HasOne("eBotanika.Services.Database.Uloge", "Uloge")
-                        .WithMany("Uposlenik")
-                        .HasForeignKey("UlogaID")
-                        .IsRequired()
-                        .HasConstraintName("FK_Uposlenik_Uloge");
-
-                    b.Navigation("Uloge");
-                });
-
             modelBuilder.Entity("eBotanika.Services.Database.Biljke", b =>
                 {
                     b.Navigation("Ocjena");
@@ -861,11 +845,6 @@ namespace eBotanika.Services.Migrations
             modelBuilder.Entity("eBotanika.Services.Database.Svrha", b =>
                 {
                     b.Navigation("Rezervacije");
-                });
-
-            modelBuilder.Entity("eBotanika.Services.Database.Uloge", b =>
-                {
-                    b.Navigation("Uposlenik");
                 });
 
             modelBuilder.Entity("eBotanika.Services.Database.Uposlenik", b =>

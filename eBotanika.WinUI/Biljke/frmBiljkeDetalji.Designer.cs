@@ -43,85 +43,87 @@ namespace eBotanika.WinUI.Biljke
             this.btnSacuvaj = new System.Windows.Forms.Button();
             this.txtCijena = new System.Windows.Forms.TextBox();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.comboBoxUposlenik = new System.Windows.Forms.ComboBox();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F);
             this.label8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.label8.Location = new System.Drawing.Point(245, 66);
-            this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label8.Location = new System.Drawing.Point(280, 70);
+            this.label8.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(243, 22);
+            this.label8.Size = new System.Drawing.Size(295, 26);
             this.label8.TabIndex = 37;
             this.label8.Text = "Dodavanje novog asortimana";
             // 
             // Prezime
             // 
             this.Prezime.AutoSize = true;
-            this.Prezime.Location = new System.Drawing.Point(253, 164);
-            this.Prezime.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.Prezime.Location = new System.Drawing.Point(203, 175);
+            this.Prezime.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.Prezime.Name = "Prezime";
-            this.Prezime.Size = new System.Drawing.Size(60, 15);
+            this.Prezime.Size = new System.Drawing.Size(68, 16);
             this.Prezime.TabIndex = 46;
             this.Prezime.Text = "Kategorija";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(253, 213);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Location = new System.Drawing.Point(203, 227);
+            this.label3.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(40, 15);
+            this.label3.Size = new System.Drawing.Size(45, 16);
             this.label3.TabIndex = 42;
             this.label3.Text = "Cijena";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(253, 256);
-            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label4.Location = new System.Drawing.Point(203, 273);
+            this.label4.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(31, 15);
+            this.label4.Size = new System.Drawing.Size(35, 16);
             this.label4.TabIndex = 40;
             this.label4.Text = "Opis";
             // 
             // txtNaziv
             // 
-            this.txtNaziv.Location = new System.Drawing.Point(351, 117);
-            this.txtNaziv.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.txtNaziv.Location = new System.Drawing.Point(315, 125);
+            this.txtNaziv.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
             this.txtNaziv.Name = "txtNaziv";
-            this.txtNaziv.Size = new System.Drawing.Size(228, 23);
+            this.txtNaziv.Size = new System.Drawing.Size(260, 22);
             this.txtNaziv.TabIndex = 39;
             this.txtNaziv.Validating += new System.ComponentModel.CancelEventHandler(this.txtNaziv_Validate);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(253, 120);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(203, 128);
+            this.label1.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(36, 15);
+            this.label1.Size = new System.Drawing.Size(41, 16);
             this.label1.TabIndex = 38;
             this.label1.Text = "Naziv";
             // 
             // comboBoxKategorija
             // 
             this.comboBoxKategorija.FormattingEnabled = true;
-            this.comboBoxKategorija.Location = new System.Drawing.Point(351, 164);
-            this.comboBoxKategorija.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.comboBoxKategorija.Location = new System.Drawing.Point(315, 175);
+            this.comboBoxKategorija.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
             this.comboBoxKategorija.Name = "comboBoxKategorija";
-            this.comboBoxKategorija.Size = new System.Drawing.Size(228, 23);
+            this.comboBoxKategorija.Size = new System.Drawing.Size(260, 24);
             this.comboBoxKategorija.TabIndex = 47;
             // 
             // richTextBoxOpis
             // 
-            this.richTextBoxOpis.Location = new System.Drawing.Point(351, 256);
-            this.richTextBoxOpis.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.richTextBoxOpis.Location = new System.Drawing.Point(315, 273);
+            this.richTextBoxOpis.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
             this.richTextBoxOpis.Name = "richTextBoxOpis";
-            this.richTextBoxOpis.Size = new System.Drawing.Size(228, 91);
+            this.richTextBoxOpis.Size = new System.Drawing.Size(260, 97);
             this.richTextBoxOpis.TabIndex = 49;
             this.richTextBoxOpis.Text = "";
             // 
@@ -131,10 +133,10 @@ namespace eBotanika.WinUI.Biljke
             this.btnSacuvaj.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.btnSacuvaj.FlatAppearance.BorderSize = 0;
             this.btnSacuvaj.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnSacuvaj.Location = new System.Drawing.Point(542, 353);
-            this.btnSacuvaj.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.btnSacuvaj.Location = new System.Drawing.Point(574, 397);
+            this.btnSacuvaj.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
             this.btnSacuvaj.Name = "btnSacuvaj";
-            this.btnSacuvaj.Size = new System.Drawing.Size(131, 46);
+            this.btnSacuvaj.Size = new System.Drawing.Size(150, 49);
             this.btnSacuvaj.TabIndex = 50;
             this.btnSacuvaj.Text = "Sačuvaj";
             this.btnSacuvaj.UseVisualStyleBackColor = false;
@@ -142,9 +144,9 @@ namespace eBotanika.WinUI.Biljke
             // 
             // txtCijena
             // 
-            this.txtCijena.Location = new System.Drawing.Point(352, 210);
+            this.txtCijena.Location = new System.Drawing.Point(316, 224);
             this.txtCijena.Name = "txtCijena";
-            this.txtCijena.Size = new System.Drawing.Size(227, 23);
+            this.txtCijena.Size = new System.Drawing.Size(259, 22);
             this.txtCijena.TabIndex = 51;
             this.txtCijena.Validating += new System.ComponentModel.CancelEventHandler(this.txtCijena_Validate);
             // 
@@ -152,11 +154,32 @@ namespace eBotanika.WinUI.Biljke
             // 
             this.errorProvider.ContainerControl = this;
             // 
+            // comboBoxUposlenik
+            // 
+            this.comboBoxUposlenik.FormattingEnabled = true;
+            this.comboBoxUposlenik.Location = new System.Drawing.Point(643, 155);
+            this.comboBoxUposlenik.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
+            this.comboBoxUposlenik.Name = "comboBoxUposlenik";
+            this.comboBoxUposlenik.Size = new System.Drawing.Size(161, 24);
+            this.comboBoxUposlenik.TabIndex = 53;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(640, 125);
+            this.label2.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(68, 16);
+            this.label2.TabIndex = 52;
+            this.label2.Text = "Uposlenik";
+            // 
             // frmBiljkeDetalji
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(823, 445);
+            this.ClientSize = new System.Drawing.Size(941, 475);
+            this.Controls.Add(this.comboBoxUposlenik);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.txtCijena);
             this.Controls.Add(this.btnSacuvaj);
             this.Controls.Add(this.richTextBoxOpis);
@@ -167,7 +190,7 @@ namespace eBotanika.WinUI.Biljke
             this.Controls.Add(this.txtNaziv);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label8);
-            this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
             this.Name = "frmBiljkeDetalji";
             this.Text = "frmBiljkeDetalji";
             this.Load += new System.EventHandler(this.frmBiljke_Load);
@@ -190,5 +213,7 @@ namespace eBotanika.WinUI.Biljke
         private System.Windows.Forms.Button btnSacuvaj;
         private TextBox txtCijena;
         private ErrorProvider errorProvider;
+        private ComboBox comboBoxUposlenik;
+        private Label label2;
     }
 }

@@ -34,7 +34,7 @@ namespace eBotanika.API.Controllers
         }
 
         [HttpGet("{id}")]
-        public List<Model.Rezervacije> GetById(int id)
+        public Model.Rezervacije GetById(int id)
         {
             return _service.GetById(id);
         }

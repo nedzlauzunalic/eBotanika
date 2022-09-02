@@ -64,11 +64,11 @@ namespace eBotanika.Services.Rezervacije
             return _mapper.Map<Model.Rezervacije>(result);
         }
 
-        public List<Model.Rezervacije> GetById(int id)
+        public Model.Rezervacije GetById(int id)
         {
-            var result = _context.Rezervacije.Where(x => x.KorisnikID == id).ToList();
+            var result = _context.Rezervacije.Find(id);
 
-            return _mapper.Map<List<Model.Rezervacije>>(result);
+            return _mapper.Map<Model.Rezervacije>(result);
         }
 
         public Model.Rezervacije Delete(int id)

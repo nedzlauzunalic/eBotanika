@@ -15,5 +15,7 @@
         public string Password { get; set; }
 
         public string PasswordPotvrda { get; set; }
+
+        public string UlogaID { get; set; }
     }
 }

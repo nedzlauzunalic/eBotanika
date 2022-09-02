@@ -15,7 +15,6 @@ namespace eBotanika.Services.Database
         public virtual DbSet<Biljke> Biljke { get; set; }
         public virtual DbSet<Dostava> Dostava { get; set; }
         public virtual DbSet<Gradovi> Gradovi { get; set; }
-        public virtual DbSet<UposlenikUloge> UposlenikUloge { get; set; }
         public virtual DbSet<Korisnik> Korisnik { get; set; }
         public virtual DbSet<Ocjena> Ocjena { get; set; }
         public virtual DbSet<Placanje> Placanje { get; set; }
@@ -53,6 +52,12 @@ namespace eBotanika.Services.Database
                    .HasForeignKey(d => d.KategorijaID)
                    .OnDelete(DeleteBehavior.ClientSetNull)
                    .HasConstraintName("FK_Biljke_Kategorija");
+
+                entity.HasOne(d => d.Uposlenik)
+                      .WithMany(p => p.Biljke)
+                      .HasForeignKey(d => d.UposlenikID)
+                      .OnDelete(DeleteBehavior.ClientSetNull)
+                      .HasConstraintName("FK_Biljke_Uposlenik");
 
             });
 
@@ -290,32 +295,11 @@ namespace eBotanika.Services.Database
                     .IsRequired()
                     .HasMaxLength(100);
 
-            });
-
-            modelBuilder.Entity<UposlenikUloge>(entity =>
-            {
-                entity.HasKey(e => e.UposlenikUlogeID);
-
-                entity.Property(e => e.UposlenikUlogeID).HasColumnName("UposlenikUlogeID");
-
-                entity.Property(e => e.DatumIzmjene).HasColumnType("datetime");
-
-                entity.Property(e => e.UposlenikID).HasColumnName("UposlenikID");
-
-                entity.HasOne(d => d.Uposlenik)
-                    .WithMany(p => p.UposlenikUloge)
-                    .HasForeignKey(d => d.UposlenikID)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_UposlenikUloge_Uposlenik");
-
-                entity.Property(e => e.UlogaID).HasColumnName("UlogaID");
-
-                entity.HasOne(d => d.Uloga)
-                    .WithMany(p => p.UposlenikUloge)
-                    .HasForeignKey(d => d.UlogaID)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_UposlenikUloge_Uloga");
-
+                entity.HasOne(d => d.Uloge)
+                      .WithMany(p => p.Uposlenik)
+                      .HasForeignKey(d => d.UlogaID)
+                      .OnDelete(DeleteBehavior.ClientSetNull)
+                      .HasConstraintName("FK_Uposlenik_Uloge");
             });
 
             OnModelCreatingPartial(modelBuilder);

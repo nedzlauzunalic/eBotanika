@@ -11,7 +11,6 @@ using eBotanika.Services.Placanje;
 using eBotanika.Services.Rezervacije;
 using eBotanika.Services.Svrha;
 using eBotanika.Services.Uloge;
-using eBotanika.Services.UposlenikUloge;
 
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.EntityFrameworkCore;
@@ -57,7 +56,6 @@ builder.Services.AddTransient<ISvrhaService, SvrhaService>();
 builder.Services.AddTransient<IDostavaService, DostavaService>();
 builder.Services.AddTransient<IPlacanjeService, PlacanjeService>();
 builder.Services.AddTransient<IRezervacijeService, RezervacijeService>();
-builder.Services.AddTransient<IUposlenikUlogeService, UposlenikUlogeService>();
 
 builder.Services.AddAutoMapper(typeof(IKorisnikService));
 

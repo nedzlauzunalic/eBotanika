@@ -11,6 +11,8 @@
         public int BiljkeID { get; set; }
         public int KategorijaID { get; set; }
         public Kategorija Kategorija { get; set; }
+        public int UposlenikID { get; set; }
+        public Uposlenik Uposlenik { get; set; }
         public string Naziv { get; set; }
         public string Opis { get; set; }
         public string? Slika { get; set; }

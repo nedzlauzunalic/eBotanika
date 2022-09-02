@@ -29,7 +29,8 @@ namespace eBotanika.Services.Database
                 Telefon = "+38762123456",
                 KorisnickoIme = "desktop",
                 LozinkaHash = "bUBHhasx3aUpr7cmjozMzIeL35c=",
-                LozinkaSalt = "zthomrUyhZjeapvj5KYL+A=="
+                LozinkaSalt = "zthomrUyhZjeapvj5KYL+A==",
+                UlogaID = 1
             });
             modelBuilder.Entity<Uposlenik>().HasData(new Uposlenik()
             {
@@ -40,25 +41,8 @@ namespace eBotanika.Services.Database
                 Telefon = "+38762345678",
                 KorisnickoIme = "desktop2",
                 LozinkaHash = "ctdN66Ftv+YJP9LAK6i3dKDqchg=",
-                LozinkaSalt = "NSqADQ/R7xKWHlTVz2BMwg=="
-            });
-            #endregion
-
-            #region UPOSLENICIULOGE
-            modelBuilder.Entity<UposlenikUloge>().HasData(new UposlenikUloge()
-            {
-                UposlenikUlogeID=1,
-                UposlenikID=1,
-                UlogaID=1, 
-                DatumIzmjene= new DateTime(2020, 6, 13, 20, 10, 26, 966, DateTimeKind.Local)
-
-            });
-            modelBuilder.Entity<UposlenikUloge>().HasData(new UposlenikUloge()
-            {
-                UposlenikUlogeID = 2,
-                UposlenikID = 2,
-                UlogaID = 2,
-                DatumIzmjene = new DateTime(2020, 6, 13, 20, 10, 26, 966, DateTimeKind.Local)
+                LozinkaSalt = "NSqADQ/R7xKWHlTVz2BMwg==",
+                UlogaID = 2
             });
             #endregion
 
@@ -139,7 +123,8 @@ namespace eBotanika.Services.Database
                 Naziv = "Petunija",
                 Opis = "Petunija pripada porodici pomoćnica,porijeklom iz Južne Amerike.",
                 Slika = "1.jpg",
-                Cijena = 100
+                Cijena = 100,
+                UposlenikID = 1
             });
             modelBuilder.Entity<Biljke>().HasData(new Biljke()
             {
@@ -148,7 +133,8 @@ namespace eBotanika.Services.Database
                 Naziv = "Lavanda ",
                 Opis = "Lavanda cvati u proljeće i u jesen ukoliko se dobro podreže nakon prve cvatnje.",
                 Slika = "2.jpg",
-                Cijena = 150
+                Cijena = 150,
+                UposlenikID = 1
             });
             modelBuilder.Entity<Biljke>().HasData(new Biljke()
             {
@@ -157,7 +143,8 @@ namespace eBotanika.Services.Database
                 Naziv = "Kesten",
                 Opis = "Pitomi kesten (Castanea sativa) je listopadno stablo iz porodice bukvi.",
                 Slika = "3.jpg",
-                Cijena = 270
+                Cijena = 270,
+                UposlenikID = 1
             });
             modelBuilder.Entity<Biljke>().HasData(new Biljke()
             {
@@ -166,7 +153,8 @@ namespace eBotanika.Services.Database
                 Naziv = "Patuljasta kleka",
                 Opis = "Patuljak smreka je jedna od mnogo varijanti ove zimzelene biljke koja obično raste kao grm.",
                 Slika = "4.jpg",
-                Cijena = 180
+                Cijena = 180,
+                UposlenikID = 1
             });
             modelBuilder.Entity<Biljke>().HasData(new Biljke()
             {
@@ -175,7 +163,8 @@ namespace eBotanika.Services.Database
                 Naziv = "Planinski bor",
                 Opis = "Planinski bor, klekovina ili bor krivulj je crnogorična vrsta drveća iz porodice Pinaceae.",
                 Slika = "5.jpg",
-                Cijena = 138
+                Cijena = 138,
+                UposlenikID = 1
             });
             #endregion
 

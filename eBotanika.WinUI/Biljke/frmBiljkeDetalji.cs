@@ -1,6 +1,7 @@
 ﻿using eBotanika.Model.Requests.Biljke;
 using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -10,6 +11,7 @@ namespace eBotanika.WinUI.Biljke
     {
         APIService _service = new APIService("Biljke");
         APIService _kategorijaService = new APIService("Kategorija");
+        APIService _uposlenikService = new APIService("Uposlenik");
         private int? _id = null;
 
         public frmBiljkeDetalji(int? id = null)
@@ -20,16 +22,21 @@ namespace eBotanika.WinUI.Biljke
 
         private async void frmBiljke_Load(object sender, EventArgs e)
         {
+            await LoadKategorije();
+            await LoadUposlenike();
+
             if (_id.HasValue)
             {
-                var entity = await _service.GetById<Model.Biljke>(_id);
+                var entity    = await _service.GetById<Model.Biljke>(_id);
+                var uposlenik = await _uposlenikService.GetById<Model.Uposlenik>(entity.UposlenikID);
+                var kategorija = await _kategorijaService.GetById<Model.Kategorija>(entity.KategorijaID);
 
-                txtNaziv.Text = entity.Naziv;
-                txtCijena.Text = entity.Cijena.ToString();
-                richTextBoxOpis.Text = entity.Opis;
+                txtNaziv.Text                    = entity.Naziv;
+                txtCijena.Text                   = entity.Cijena.ToString();
+                richTextBoxOpis.Text             = entity.Opis;
+                comboBoxUposlenik.SelectedIndex  = comboBoxUposlenik.FindString(uposlenik.Ime);
+                comboBoxKategorija.SelectedIndex = comboBoxKategorija.FindString(kategorija.Naziv);
             }
-
-            await LoadKategorije();
         }
 
         private async void btnSacuvaj_OnClick(object sender, EventArgs e)
@@ -41,7 +48,8 @@ namespace eBotanika.WinUI.Biljke
                     Naziv = txtNaziv.Text,
                     KategorijaID = comboBoxKategorija.SelectedValue.ToString(),
                     Cijena = txtCijena.Text,
-                    Opis = richTextBoxOpis.Text
+                    Opis = richTextBoxOpis.Text,
+                    UposlenikID = comboBoxUposlenik.SelectedValue.ToString()
                 };
 
                 var biljke = await _service.Insert<Model.Biljke>(insertRequest);
@@ -54,7 +62,8 @@ namespace eBotanika.WinUI.Biljke
                     Naziv = txtNaziv.Text,
                     KategorijaID = comboBoxKategorija.SelectedValue.ToString(),
                     Cijena = txtCijena.Text,
-                    Opis = richTextBoxOpis.Text
+                    Opis = richTextBoxOpis.Text,
+                    UposlenikID = comboBoxUposlenik.SelectedValue.ToString()
                 };
 
                 var biljke = await _service.Update<Model.Biljke>(_id.Value, updateRequest);
@@ -69,6 +78,15 @@ namespace eBotanika.WinUI.Biljke
             comboBoxKategorija.DataSource = result;
             comboBoxKategorija.DisplayMember = "Naziv";
             comboBoxKategorija.ValueMember = "KategorijaID";
+        }
+
+        private async Task LoadUposlenike()
+        {
+            var result = await _uposlenikService.Get<List<Model.Uposlenik>>();
+
+            comboBoxUposlenik.DataSource    = result;
+            comboBoxUposlenik.DisplayMember = "Ime";
+            comboBoxUposlenik.ValueMember   = "UposlenikID";
         }
 
         private void txtNaziv_Validate(object sender, System.ComponentModel.CancelEventArgs e)
@@ -88,11 +106,11 @@ namespace eBotanika.WinUI.Biljke
 
         private void txtCijena_Validate(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(txtCijena.Text))
+            if (!Regex.IsMatch(txtCijena.Text, @"[0-9]$"))
             {
                 e.Cancel = true;
                 txtCijena.Focus();
-                errorProvider.SetError(txtCijena, "Cijena je obavezna!");
+                errorProvider.SetError(txtCijena, "Samo brojevi dozvoljeni.");
             }
             else
             {
