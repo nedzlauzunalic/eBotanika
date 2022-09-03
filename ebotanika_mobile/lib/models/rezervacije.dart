@@ -7,6 +7,8 @@ class Rezervacije {
   final String AdresaDostave;
   final String Kolicina;
   final int BiljkeID;
+  final int OcjenaID;
+  final double OcjenaUsluge;
 
   Rezervacije(
       {
@@ -17,7 +19,9 @@ class Rezervacije {
       required this.SvrhaID,
       required this.AdresaDostave,
       required this.Kolicina,
-      required this.BiljkeID});
+      required this.BiljkeID,
+      required this.OcjenaID,
+      required this.OcjenaUsluge});
 
   factory Rezervacije.fromJson(Map<String, dynamic> json) {
     return Rezervacije(
@@ -28,7 +32,9 @@ class Rezervacije {
         SvrhaID: json["SvrhaID"],
         AdresaDostave: json["AdresaDostave"],
         Kolicina: json["Kolicina"],
-        BiljkeID: json["BiljkeID"]);
+        BiljkeID: json["BiljkeID"],
+        OcjenaID: json["OcjenaID"],
+        OcjenaUsluge: json["OcjenaUsluge"]);
   }
 
   Map<String, dynamic> toJson() => {
@@ -39,6 +45,8 @@ class Rezervacije {
         "SvrhaID": SvrhaID,
         "AdresaDostave": AdresaDostave,
         "Kolicina": Kolicina,
-        "BiljkeID": BiljkeID
+        "BiljkeID": BiljkeID,
+        "OcjenaID": OcjenaID,
+        "OcjenaUsluge": OcjenaUsluge
       };
 }

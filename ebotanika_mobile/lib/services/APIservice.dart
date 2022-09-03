@@ -134,4 +134,27 @@ class APIService {
       return null;
     }
   }
+
+  static Future<dynamic> delete(String route, int id) async {
+    String baseUrl = "http://10.0.2.2:44363/$route/$id";
+
+    final String basicAuth =
+        'Basic ${base64Encode(utf8.encode('$username:$password'))}';
+
+    final response = await http.delete(
+      Uri.parse(baseUrl),
+      headers: {
+        HttpHeaders.contentTypeHeader: 'application/json; charset=UTF-8',
+        HttpHeaders.authorizationHeader: basicAuth
+      }
+    );
+
+    if (response.statusCode == 200) {
+      return json.decode(response.body.toString());
+    } else {
+      return null;
+    }
+  }
+
+
 }

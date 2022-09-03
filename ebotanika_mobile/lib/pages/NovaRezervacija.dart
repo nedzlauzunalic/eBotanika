@@ -4,10 +4,10 @@ import 'package:ebotanika_mobile/pages/Placanja.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import '../models/gradovi.dart';
+import '../models/ocjena.dart';
 import '../models/rezervacije.dart';
 import '../services/APIservice.dart';
 // ignore: depend_on_referenced_packages
-
 
 import 'Recommended.dart';
 
@@ -15,7 +15,8 @@ import 'Recommended.dart';
 class NovaRezervacija extends StatefulWidget {
   var biljkaID = 0;
   double cijena = 0;
-  NovaRezervacija({Key? key, required this.biljkaID, required this.cijena}) : super(key: key);
+  NovaRezervacija({Key? key, required this.biljkaID, required this.cijena})
+      : super(key: key);
 
   @override
   // ignore: library_private_types_in_public_api
@@ -31,7 +32,9 @@ class _NovaRezervacijaState extends State<NovaRezervacija> {
   List<DropdownMenuItem> items = [];
   Svrha? _selectedSvrha;
   List<DropdownMenuItem<Gradovi>> gradovi = [];
+  List<DropdownMenuItem<Ocjena>> ocjene = [];
   Gradovi? _selectedGrad;
+  Ocjena? _selectedOcjena;
   int? biljkeID;
 
   @override
@@ -117,6 +120,35 @@ class _NovaRezervacijaState extends State<NovaRezervacija> {
         });
   }
 
+  Widget dropDownOcjenaWidget() {
+    return FutureBuilder<List<Ocjena>>(
+        future: getOcjene(_selectedOcjena),
+        builder: (BuildContext context, AsyncSnapshot<List<Ocjena>> snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: Text('Loading..'));
+          } else {
+            if (snapshot.hasError) {
+              return Center(child: Text('Error:${snapshot.error}'));
+            } else {
+              return Padding(
+                padding: const EdgeInsets.fromLTRB(0, 10, 5, 0),
+                child: DropdownButton<dynamic>(
+                  hint: const Text('Odaberite ocjenu'),
+                  isExpanded: true,
+                  items: ocjene,
+                  onChanged: (valueNew) {
+                    setState(() {
+                      _selectedOcjena = valueNew;
+                    });
+                  },
+                  value: _selectedOcjena,
+                ),
+              );
+            }
+          }
+        });
+  }
+
   Widget NovaRezervacijaWidget(biljka) {
     return Scaffold(
         body: SingleChildScrollView(
@@ -133,8 +165,7 @@ class _NovaRezervacijaState extends State<NovaRezervacija> {
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => Recommended(
-                                          biljkaID: widget.biljkaID
-                                        )));
+                                        biljkaID: widget.biljkaID)));
                           },
                           style: ElevatedButton.styleFrom(
                               primary: Colors.green[900],
@@ -200,6 +231,10 @@ class _NovaRezervacijaState extends State<NovaRezervacija> {
                       const SizedBox(
                         height: 35,
                       ),
+                      Center(child: dropDownOcjenaWidget()),
+                      const SizedBox(
+                        height: 35,
+                      ),
                       Container(
                         padding: const EdgeInsets.all(5),
                         height: 45,
@@ -214,6 +249,7 @@ class _NovaRezervacijaState extends State<NovaRezervacija> {
                                 DateFormat('yyyy-MM-dd').parse(date);
                             var svrhaID = _selectedSvrha!.svrhaID;
                             var gradID = _selectedGrad!.gradID;
+                            var ocjenaID = _selectedOcjena!.ocjenaID;
                             var rezervacija = Rezervacije(
                                 KorisnikID: APIService.korisnikId,
                                 GradID: gradID,
@@ -222,7 +258,9 @@ class _NovaRezervacijaState extends State<NovaRezervacija> {
                                 SvrhaID: svrhaID.toString(),
                                 AdresaDostave: adresaDostaveController.text,
                                 Kolicina: kolicinaController.text,
-                                BiljkeID: widget.biljkaID);
+                                BiljkeID: widget.biljkaID,
+                                OcjenaID: ocjenaID,
+                                OcjenaUsluge: 1);
 
                             var result = await APIService.post("Rezervacije",
                                 json.encode(rezervacija.toJson()));
@@ -254,9 +292,8 @@ class _NovaRezervacijaState extends State<NovaRezervacija> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => Placanja(
-                                          cijena: widget.cijena
-                                        )));
+                                    builder: (context) =>
+                                        Placanja(cijena: widget.cijena)));
                           },
                           style: ElevatedButton.styleFrom(
                               primary: Colors.green[900],
@@ -306,5 +343,25 @@ class _NovaRezervacijaState extends State<NovaRezervacija> {
     }
 
     return gradoviLista;
+  }
+
+  Future<List<Ocjena>> getOcjene(Ocjena? selectedOcjena) async {
+    var ocjena = await APIService.get('Ocjena', null);
+    var ocjenaLista = ocjena?.map((i) => Ocjena.fromJson(i)).toList();
+
+    ocjene = ocjenaLista!.map((item) {
+      return DropdownMenuItem<Ocjena>(
+        value: item,
+        child: Text(item.ocjenaUsluge.toString()),
+      );
+    }).toList();
+
+    if (selectedOcjena != null && selectedOcjena.ocjenaID != 0) {
+      _selectedOcjena = ocjenaLista
+          .where((element) => element.ocjenaID == selectedOcjena.ocjenaID)
+          .first;
+    }
+
+    return ocjenaLista;
   }
 }

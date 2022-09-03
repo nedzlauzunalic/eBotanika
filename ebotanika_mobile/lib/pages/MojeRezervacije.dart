@@ -1,8 +1,7 @@
 import 'dart:convert';
-import 'package:ebotanika_mobile/models/ocjena.dart';
 import 'package:ebotanika_mobile/models/rezervacijeList.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+import '../models/ocjena.dart';
 import '../services/APIservice.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
@@ -130,8 +129,7 @@ class _MojeRezervacijeState extends State<MojeRezervacije> {
                 style: const TextStyle(fontSize: 15, color: Colors.black)),
           ),
           RatingBar.builder(
-              initialRating: 0,
-              minRating: 1,
+              initialRating: RezervacijeList.ocjenaUsluge,
               direction: Axis.horizontal,
               allowHalfRating: true,
               itemCount: 5,
@@ -142,16 +140,15 @@ class _MojeRezervacijeState extends State<MojeRezervacije> {
                   ),
               updateOnDrag: false,
               onRatingUpdate: (value) async {
-                setState(() {
-                  rating = value;
-                });
+                setState(() {});
                 var request = Ocjena(
+                    ocjenaID: RezervacijeList.ocjenaID,
                     ocjenaUsluge: value,
                     korisnikID: APIService.korisnikId,
                     biljkeID: RezervacijeList.biljkeID);
 
-                var result = await APIService.put("Ocjena",
-                    APIService.korisnikId, json.encode(request.toJson()));
+                var result = await APIService.put(
+                    "Ocjena", request.ocjenaID, json.encode(request.toJson()));
 
                 if (result != null) {
                   // ignore: use_build_context_synchronously
@@ -173,7 +170,7 @@ class _MojeRezervacijeState extends State<MojeRezervacije> {
                 color: Colors.green, shape: BoxShape.circle),
             alignment: Alignment.center,
             child: Text(
-              rating == null ? "0" : rating.toString(),
+              RezervacijeList.ocjenaUsluge.toString(),
               style: const TextStyle(color: Colors.white, fontSize: 20),
             ),
           ),
@@ -181,13 +178,41 @@ class _MojeRezervacijeState extends State<MojeRezervacije> {
             "Ocjena",
             style: TextStyle(color: Colors.black, fontSize: 20),
           ),
+          Padding(
+            padding: const EdgeInsets.all(5),
+            child: ElevatedButton(
+              onPressed: () async {
+                var result = await APIService.delete(
+                    "Rezervacije", RezervacijeList.rezervacijaID);
+
+                if (result != null) {
+                  setState(() {
+                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                      content: SizedBox(
+                          height: 20,
+                          child: Center(
+                              child:
+                                  Text("Uspješno ste uklonili rezervaciju."))),
+                      backgroundColor: Color.fromARGB(255, 9, 100, 13),
+                    ));
+                  });
+                }
+              },
+              style: ElevatedButton.styleFrom(
+                  primary: Colors.red[900],
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 10)),
+              child: const Text('Ukloni rezervaciju'),
+            ),
+          )
         ],
       ),
     ))));
   }
 
   Future<List<RezervacijeList>> getRezervacije() async {
-    var rez = await APIService.getById('Rezervacije/korisnik', APIService.korisnikId);
+    var rez =
+        await APIService.getById('Rezervacije/korisnik', APIService.korisnikId);
 
     return rez!.map((i) => RezervacijeList.fromJson(i)).toList();
   }
