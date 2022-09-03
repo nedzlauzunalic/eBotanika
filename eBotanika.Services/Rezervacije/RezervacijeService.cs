@@ -18,7 +18,7 @@ namespace eBotanika.Services.Rezervacije
 
         public List<Model.Rezervacije> Get(RezervacijeSearchRequest search)
         {
-            var query = _context.Rezervacije.Include(x => x.Korisnik).Include(x => x.Grad).Include(x => x.Svrha).Include(x => x.Biljke).AsQueryable();
+            var query = _context.Rezervacije.Include(x => x.Korisnik).Include(x => x.Grad).Include(x => x.Svrha).Include(x => x.Biljke).Include(x => x.Ocjena).AsQueryable();
 
             if (search.SvrhaID != null)
             {
@@ -75,6 +75,14 @@ namespace eBotanika.Services.Rezervacije
         {
             var result = _context.Rezervacije.Where(x => x.KorisnikID == id).ToList();
 
+            foreach (var x in result)
+            {
+                foreach (var o in _context.Ocjena.Where(l => l.KorisnikID == id && l.OcjenaID == x.OcjenaID).ToList())
+                {
+                    x.OcjenaUsluge = o.OcjenaUsluge;
+                }
+            }
+        
             return _mapper.Map<List<Model.Rezervacije>>(result);
         }
 

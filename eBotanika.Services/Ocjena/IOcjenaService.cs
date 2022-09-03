@@ -12,5 +12,6 @@ namespace eBotanika.Services.Ocjena
 
         Model.Ocjena Delete(int id);
         List<Model.Ocjena> GetByKorisnikId(int korisnikid);
+        Model.Ocjena GetById(int id);
     }
 }

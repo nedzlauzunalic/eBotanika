@@ -206,7 +206,8 @@ namespace eBotanika.Services.Database
                 Kolicina = 2,
                 SvrhaID = 1,
                 BiljkeID = 1,
-                AdresaDostave = "Ćamila Sijarića"
+                AdresaDostave = "Ćamila Sijarića",
+                OcjenaID = 1
             });
             modelBuilder.Entity<Rezervacije>().HasData(new Rezervacije()
             {
@@ -218,7 +219,8 @@ namespace eBotanika.Services.Database
                 Kolicina = 1,
                 SvrhaID = 2,
                 BiljkeID = 2,
-                AdresaDostave = "Azize Šaćirbegović"
+                AdresaDostave = "Azize Šaćirbegović",
+                OcjenaID = 4
             });
             modelBuilder.Entity<Rezervacije>().HasData(new Rezervacije()
             {
@@ -230,7 +232,8 @@ namespace eBotanika.Services.Database
                 Kolicina = 3,
                 SvrhaID = 1,
                 BiljkeID = 3,
-                AdresaDostave = "Nedima Filipovića"
+                AdresaDostave = "Nedima Filipovića",
+                OcjenaID = 2
             });
             modelBuilder.Entity<Rezervacije>().HasData(new Rezervacije()
             {
@@ -242,7 +245,8 @@ namespace eBotanika.Services.Database
                 Kolicina = 4,
                 SvrhaID = 3,
                 BiljkeID = 4,
-                AdresaDostave = "Hasana Brkića"
+                AdresaDostave = "Hasana Brkića",
+                OcjenaID = 3
             });
             #endregion
 
@@ -300,14 +304,14 @@ namespace eBotanika.Services.Database
             modelBuilder.Entity<Ocjena>().HasData(new Ocjena()
             {
                 OcjenaID = 2,
-                BiljkeID = 2,
+                BiljkeID = 3,
                 KorisnikID = 1,
                 OcjenaUsluge = 5
             });
             modelBuilder.Entity<Ocjena>().HasData(new Ocjena()
             {
                 OcjenaID = 3,
-                BiljkeID = 3,
+                BiljkeID = 4,
                 KorisnikID = 2,
                 OcjenaUsluge = 5
             });

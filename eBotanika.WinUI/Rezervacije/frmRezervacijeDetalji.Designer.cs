@@ -41,6 +41,7 @@ namespace eBotanika.WinUI.Rezervacije
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.dgvRezervacije = new System.Windows.Forms.DataGridView();
             this.RezervacijaID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.OcjenaID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -142,6 +143,7 @@ namespace eBotanika.WinUI.Rezervacije
             this.dgvRezervacije.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvRezervacije.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.RezervacijaID,
+            this.OcjenaID,
             this.Column1,
             this.Column2,
             this.Column3,
@@ -168,6 +170,15 @@ namespace eBotanika.WinUI.Rezervacije
             this.RezervacijaID.Name = "RezervacijaID";
             this.RezervacijaID.Visible = false;
             this.RezervacijaID.Width = 125;
+            // 
+            // OcjenaID
+            // 
+            this.OcjenaID.DataPropertyName = "OcjenaID";
+            this.OcjenaID.HeaderText = "OcjenaID";
+            this.OcjenaID.MinimumWidth = 6;
+            this.OcjenaID.Name = "OcjenaID";
+            this.OcjenaID.Visible = false;
+            this.OcjenaID.Width = 125;
             // 
             // Column1
             // 
@@ -268,6 +279,7 @@ namespace eBotanika.WinUI.Rezervacije
         private GroupBox groupBox1;
         private DataGridView dgvRezervacije;
         private DataGridViewTextBoxColumn RezervacijaID;
+        private DataGridViewTextBoxColumn OcjenaID;
         private DataGridViewTextBoxColumn Column1;
         private DataGridViewTextBoxColumn Column2;
         private DataGridViewTextBoxColumn Column3;

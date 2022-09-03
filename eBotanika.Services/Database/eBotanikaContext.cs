@@ -226,11 +226,29 @@ namespace eBotanika.Services.Database
 
                 entity.Property(e => e.SvrhaID).HasColumnName("SvrhaID");
 
+                entity.Property(e => e.OcjenaUsluge).HasColumnType("decimal(18, 2)");
+
                 entity.HasOne(d => d.Svrha)
                     .WithMany(p => p.Rezervacije)
                     .HasForeignKey(d => d.SvrhaID)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Rezervacije_Svrha");
+
+                entity.Property(e => e.BiljkeID).HasColumnName("BiljkeID");
+
+                entity.HasOne(d => d.Biljke)
+                      .WithMany(p => p.Rezervacije)
+                      .HasForeignKey(d => d.BiljkeID)
+                      .OnDelete(DeleteBehavior.ClientSetNull)
+                      .HasConstraintName("FK_Rezervacije_Biljke");
+
+                entity.Property(e => e.OcjenaID).HasColumnName("OcjenaID");
+
+                entity.HasOne(d => d.Ocjena)
+                      .WithMany(p => p.Rezervacije)
+                      .HasForeignKey(d => d.OcjenaID)
+                      .OnDelete(DeleteBehavior.ClientSetNull)
+                      .HasConstraintName("FK_Rezervacije_Ocjena");
             });
 
             modelBuilder.Entity<Svrha>(entity =>

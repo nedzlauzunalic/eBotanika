@@ -83,5 +83,11 @@ namespace eBotanika.Services.Ocjena
 
             return _mapper.Map<List<Model.Ocjena>>(result);
         }
+
+        public Model.Ocjena GetById(int id)
+        { 
+            var entity = _context.Ocjena.Find(id);
+            return _mapper.Map<Model.Ocjena>(entity);
+        }
     }
 }

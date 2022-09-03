@@ -10,5 +10,6 @@
         public string AdresaDostave { get; set; }
         public string Kolicina { get; set; }
         public int BiljkeID { get; set; }
+        public int OcjenaID { get; set; }
     }
 }

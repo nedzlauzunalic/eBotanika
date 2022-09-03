@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using eBotanika.Services.Database;
 
@@ -11,9 +12,10 @@ using eBotanika.Services.Database;
 namespace eBotanika.Services.Migrations
 {
     [DbContext(typeof(eBotanikaContext))]
-    partial class eBotanikaContextModelSnapshot : ModelSnapshot
+    [Migration("20220903132130_fix")]
+    partial class fix
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -61,7 +63,7 @@ namespace eBotanika.Services.Migrations
 
                     b.HasIndex("UposlenikID");
 
-                    b.ToTable("Biljke", (string)null);
+                    b.ToTable("Biljke");
 
                     b.HasData(
                         new
@@ -154,7 +156,7 @@ namespace eBotanika.Services.Migrations
 
                     b.HasIndex("RezervacijaID");
 
-                    b.ToTable("Dostava", (string)null);
+                    b.ToTable("Dostava");
 
                     b.HasData(
                         new
@@ -215,7 +217,7 @@ namespace eBotanika.Services.Migrations
 
                     b.HasKey("GradID");
 
-                    b.ToTable("Gradovi", (string)null);
+                    b.ToTable("Gradovi");
 
                     b.HasData(
                         new
@@ -256,7 +258,7 @@ namespace eBotanika.Services.Migrations
 
                     b.HasKey("KategorijaID");
 
-                    b.ToTable("Kategorija", (string)null);
+                    b.ToTable("Kategorija");
 
                     b.HasData(
                         new
@@ -344,13 +346,13 @@ namespace eBotanika.Services.Migrations
                         .IsUnique()
                         .HasDatabaseName("Korisnik_Email");
 
-                    b.ToTable("Korisnik", (string)null);
+                    b.ToTable("Korisnik");
 
                     b.HasData(
                         new
                         {
                             KorisnikID = 1,
-                            DatumRodjenja = new DateTime(2022, 9, 3, 15, 45, 30, 467, DateTimeKind.Local).AddTicks(8852),
+                            DatumRodjenja = new DateTime(2022, 9, 3, 15, 21, 30, 50, DateTimeKind.Local).AddTicks(100),
                             Email = "korisnik@live.com",
                             Ime = "Mobile",
                             KorisnickoIme = "mobile",
@@ -362,7 +364,7 @@ namespace eBotanika.Services.Migrations
                         new
                         {
                             KorisnikID = 2,
-                            DatumRodjenja = new DateTime(2022, 9, 3, 15, 45, 30, 467, DateTimeKind.Local).AddTicks(8895),
+                            DatumRodjenja = new DateTime(2022, 9, 3, 15, 21, 30, 50, DateTimeKind.Local).AddTicks(140),
                             Email = "adnan@live.com",
                             Ime = "Adnan",
                             KorisnickoIme = "adnan",
@@ -399,7 +401,7 @@ namespace eBotanika.Services.Migrations
 
                     b.HasIndex("KorisnikID");
 
-                    b.ToTable("Ocjena", (string)null);
+                    b.ToTable("Ocjena");
 
                     b.HasData(
                         new
@@ -460,7 +462,7 @@ namespace eBotanika.Services.Migrations
 
                     b.HasIndex("KorisnikId");
 
-                    b.ToTable("Placanje", (string)null);
+                    b.ToTable("Placanje");
                 });
 
             modelBuilder.Entity("eBotanika.Services.Database.Rezervacije", b =>
@@ -522,7 +524,7 @@ namespace eBotanika.Services.Migrations
 
                     b.HasIndex("SvrhaID");
 
-                    b.ToTable("Rezervacije", (string)null);
+                    b.ToTable("Rezervacije");
 
                     b.HasData(
                         new
@@ -536,7 +538,7 @@ namespace eBotanika.Services.Migrations
                             KorisnikID = 1,
                             Napomena = "",
                             OcjenaID = 1,
-                            OcjenaUsluge = 0m,
+                            OcjenaUsluge = 4m,
                             SvrhaID = 1
                         },
                         new
@@ -550,7 +552,7 @@ namespace eBotanika.Services.Migrations
                             KorisnikID = 2,
                             Napomena = "Dostava na adresu",
                             OcjenaID = 4,
-                            OcjenaUsluge = 0m,
+                            OcjenaUsluge = 4m,
                             SvrhaID = 2
                         },
                         new
@@ -564,7 +566,7 @@ namespace eBotanika.Services.Migrations
                             KorisnikID = 1,
                             Napomena = "Placanje pri preuzimanju",
                             OcjenaID = 2,
-                            OcjenaUsluge = 0m,
+                            OcjenaUsluge = 5m,
                             SvrhaID = 1
                         },
                         new
@@ -578,7 +580,7 @@ namespace eBotanika.Services.Migrations
                             KorisnikID = 2,
                             Napomena = "Placanje pri preuzimanju",
                             OcjenaID = 3,
-                            OcjenaUsluge = 0m,
+                            OcjenaUsluge = 5m,
                             SvrhaID = 3
                         });
                 });
@@ -599,7 +601,7 @@ namespace eBotanika.Services.Migrations
 
                     b.HasKey("SvrhaID");
 
-                    b.ToTable("Svrha", (string)null);
+                    b.ToTable("Svrha");
 
                     b.HasData(
                         new
@@ -635,7 +637,7 @@ namespace eBotanika.Services.Migrations
 
                     b.HasKey("UlogaID");
 
-                    b.ToTable("Uloge", (string)null);
+                    b.ToTable("Uloge");
 
                     b.HasData(
                         new
@@ -705,7 +707,7 @@ namespace eBotanika.Services.Migrations
 
                     b.HasIndex("UlogaID");
 
-                    b.ToTable("Uposlenik", (string)null);
+                    b.ToTable("Uposlenik");
 
                     b.HasData(
                         new

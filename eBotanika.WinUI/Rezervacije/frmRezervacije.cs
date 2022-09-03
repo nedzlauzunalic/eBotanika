@@ -9,12 +9,13 @@ namespace eBotanika.WinUI.Rezervacije
 {
     public partial class frmRezervacije : Form
     {
-        APIService _apiService = new APIService("Rezervacije");
-        APIService _svrhaService = new APIService("Svrha");
-        APIService _korisnikService = new APIService("Korisnik");
-        APIService _gradoviService = new APIService("Gradovi");
-        APIService _biljkeService = new APIService("Biljke");
-        private int? _id = null;
+        APIService   _apiService      = new APIService("Rezervacije");
+        APIService   _svrhaService    = new APIService("Svrha");
+        APIService   _korisnikService = new APIService("Korisnik");
+        APIService   _gradoviService  = new APIService("Gradovi");
+        APIService   _biljkeService   = new APIService("Biljke");
+        APIService   _ocjenaService   = new APIService("Ocjena");
+        private int? _id              = null;
         
         public frmRezervacije(int? id = null)
         {
@@ -28,6 +29,7 @@ namespace eBotanika.WinUI.Rezervacije
             await LoadKorisnik();
             await LoadGrad();
             await LoadBiljke();
+            await LoadOcjena();
 
             if (_id.HasValue)
             { 
@@ -35,16 +37,18 @@ namespace eBotanika.WinUI.Rezervacije
                 var biljka   = await _biljkeService.GetById<Model.Biljke>(entity.BiljkeID);
                 var grad     = await _gradoviService.GetById<Model.Gradovi>(entity.GradID);
                 var korisnik = await _korisnikService.GetById<Model.Korisnik>(entity.KorisnikID);
-                var svrha = await _svrhaService.GetById<Model.Svrha>(entity.SvrhaID);
+                var svrha    = await _svrhaService.GetById<Model.Svrha>(entity.SvrhaID);
+                var ocjena    = await _ocjenaService.GetById<Model.Ocjena>(entity.OcjenaID);
 
-                txtAdresaDostave.Text = entity.AdresaDostave;
-                txtDatumRezervacije.Text = entity.DatumRezervacije;
-                txtKolicina.Text = entity.Kolicina;
-                txtNapomena.Text = entity.Napomena;
-                comboBoxBiljke.SelectedIndex = comboBoxBiljke.FindString(biljka.Naziv);
-                comboBoxGrad.SelectedIndex = comboBoxGrad.FindString(grad.Naziv);
+                txtAdresaDostave.Text          = entity.AdresaDostave;
+                txtDatumRezervacije.Text       = entity.DatumRezervacije;
+                txtKolicina.Text               = entity.Kolicina;
+                txtNapomena.Text               = entity.Napomena;
+                comboBoxBiljke.SelectedIndex   = comboBoxBiljke.FindString(biljka.Naziv);
+                comboBoxGrad.SelectedIndex     = comboBoxGrad.FindString(grad.Naziv);
                 comboBoxKorisnik.SelectedIndex = comboBoxKorisnik.FindString(korisnik.Ime);
-                comboBoxSvrha.SelectedIndex = comboBoxSvrha.FindString(svrha.Naziv);
+                comboBoxSvrha.SelectedIndex    = comboBoxSvrha.FindString(svrha.Naziv);
+                comboBoxOcjena.SelectedIndex   = comboBoxOcjena.FindString(ocjena.OcjenaUsluge.ToString());
             }
         }
 
@@ -59,7 +63,8 @@ namespace eBotanika.WinUI.Rezervacije
                 GradID = (int)comboBoxGrad.SelectedValue,
                 Kolicina = txtKolicina.Text,
                 BiljkeID = (int)comboBoxBiljke.SelectedValue,
-                AdresaDostave = txtAdresaDostave.Text
+                AdresaDostave = txtAdresaDostave.Text,
+                OcjenaID = (int)comboBoxOcjena.SelectedValue
             };
 
             var rezervacija = await _apiService.Insert<Model.Rezervacije>(insertRequest);
@@ -73,6 +78,15 @@ namespace eBotanika.WinUI.Rezervacije
             comboBoxSvrha.DataSource = result;
             comboBoxSvrha.DisplayMember = "Naziv";
             comboBoxSvrha.ValueMember = "SvrhaID";
+        }
+
+        private async Task LoadOcjena()
+        {
+            var result = await _ocjenaService.Get<List<Model.Ocjena>>();
+
+            comboBoxOcjena.DataSource    = result;
+            comboBoxOcjena.DisplayMember = "OcjenaUsluge";
+            comboBoxOcjena.ValueMember   = "OcjenaID";
         }
 
         private async Task LoadKorisnik()

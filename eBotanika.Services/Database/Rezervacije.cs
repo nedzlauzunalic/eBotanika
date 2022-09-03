@@ -19,6 +19,9 @@
         public Svrha Svrha { get; set; }
         public int BiljkeID { get; set; }
         public Biljke Biljke { get; set; }
+        public int OcjenaID { get; set; }
+        public Ocjena Ocjena { get; set; } 
+        public decimal OcjenaUsluge { get; set; }
         public ICollection<Dostava> Dostava { get; set; }
     }
 }

@@ -52,6 +52,8 @@ namespace eBotanika.WinUI.Rezervacije
             this.comboBoxBiljke = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.txtAdresaDostave = new System.Windows.Forms.TextBox();
+            this.comboBoxOcjena = new System.Windows.Forms.ComboBox();
+            this.label6 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.SuspendLayout();
             // 
@@ -79,7 +81,7 @@ namespace eBotanika.WinUI.Rezervacije
             // 
             // txtNapomena
             // 
-            this.txtNapomena.Location = new System.Drawing.Point(738, 207);
+            this.txtNapomena.Location = new System.Drawing.Point(707, 191);
             this.txtNapomena.Margin = new System.Windows.Forms.Padding(4);
             this.txtNapomena.Name = "txtNapomena";
             this.txtNapomena.Size = new System.Drawing.Size(208, 22);
@@ -88,7 +90,7 @@ namespace eBotanika.WinUI.Rezervacije
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(735, 184);
+            this.label3.Location = new System.Drawing.Point(704, 168);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(75, 16);
@@ -162,7 +164,7 @@ namespace eBotanika.WinUI.Rezervacije
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(735, 105);
+            this.label7.Location = new System.Drawing.Point(704, 89);
             this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(37, 16);
@@ -172,7 +174,7 @@ namespace eBotanika.WinUI.Rezervacije
             // comboBoxGrad
             // 
             this.comboBoxGrad.FormattingEnabled = true;
-            this.comboBoxGrad.Location = new System.Drawing.Point(737, 134);
+            this.comboBoxGrad.Location = new System.Drawing.Point(706, 118);
             this.comboBoxGrad.Margin = new System.Windows.Forms.Padding(4);
             this.comboBoxGrad.Name = "comboBoxGrad";
             this.comboBoxGrad.Size = new System.Drawing.Size(209, 24);
@@ -242,11 +244,32 @@ namespace eBotanika.WinUI.Rezervacije
             this.txtAdresaDostave.Size = new System.Drawing.Size(241, 22);
             this.txtAdresaDostave.TabIndex = 20;
             // 
+            // comboBoxOcjena
+            // 
+            this.comboBoxOcjena.FormattingEnabled = true;
+            this.comboBoxOcjena.Location = new System.Drawing.Point(706, 255);
+            this.comboBoxOcjena.Margin = new System.Windows.Forms.Padding(4);
+            this.comboBoxOcjena.Name = "comboBoxOcjena";
+            this.comboBoxOcjena.Size = new System.Drawing.Size(209, 24);
+            this.comboBoxOcjena.TabIndex = 30;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(704, 226);
+            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(50, 16);
+            this.label6.TabIndex = 29;
+            this.label6.Text = "Ocjena";
+            // 
             // frmRezervacije
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1028, 529);
+            this.ClientSize = new System.Drawing.Size(977, 488);
+            this.Controls.Add(this.comboBoxOcjena);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.txtDatumRezervacije);
             this.Controls.Add(this.btnRezervisi);
@@ -298,5 +321,7 @@ namespace eBotanika.WinUI.Rezervacije
         private ComboBox comboBoxBiljke;
         private TextBox txtAdresaDostave;
         private Label label4;
+        private ComboBox comboBoxOcjena;
+        private Label label6;
     }
 }

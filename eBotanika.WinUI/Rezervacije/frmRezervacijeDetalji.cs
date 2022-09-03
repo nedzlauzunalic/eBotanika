@@ -4,17 +4,15 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-using Newtonsoft.Json;
-
 namespace eBotanika.WinUI.Rezervacije
 {
     public partial class frmRezervacijeDetalji : Form
     {
-        APIService _service = new APIService("Rezervacije");
-        APIService   _biljkeService = new APIService("Biljke");
-        APIService   _svrhaService  = new APIService("Svrha");
+        APIService   _service         = new APIService("Rezervacije");
+        APIService   _biljkeService   = new APIService("Biljke");
+        APIService   _svrhaService    = new APIService("Svrha");
         APIService   _korisnikService = new APIService("Korisnik");
-        private int? _id = null;
+        private int? _id              = null;
 
         public frmRezervacijeDetalji(int? id = null)
         {
