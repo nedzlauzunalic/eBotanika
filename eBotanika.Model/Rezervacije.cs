@@ -12,5 +12,6 @@
         public string Kolicina { get; set; }
         public int BiljkeID { get; set; }
         public int OcjenaID { get; set; }
+        public decimal OcjenaUsluge { get; set; }
     }
 }
