@@ -76,5 +76,12 @@ namespace eBotanika.Services.Ocjena
 
             return _mapper.Map<Model.Ocjena>(result);
         }
+
+        public List<Model.Ocjena> GetByKorisnikId(int korisnikid)
+        {
+            var result = _context.Ocjena.Where(x => x.KorisnikID == korisnikid).ToList();
+
+            return _mapper.Map<List<Model.Ocjena>>(result);
+        }
     }
 }

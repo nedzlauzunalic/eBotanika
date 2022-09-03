@@ -11,5 +11,6 @@ namespace eBotanika.Services.Ocjena
         Model.Ocjena Update(int id, OcjenaInsertRequest request);
 
         Model.Ocjena Delete(int id);
+        List<Model.Ocjena> GetByKorisnikId(int korisnikid);
     }
 }

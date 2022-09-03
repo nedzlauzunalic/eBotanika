@@ -8,6 +8,8 @@ namespace eBotanika.Services.Rezervacije
 
         Model.Rezervacije GetById(int id);
 
+        List<Model.Rezervacije> GetByKorisnikId(int id);
+
         Model.Rezervacije Insert(RezervacijeInsertRequest request);
 
         Model.Rezervacije Update(int id, RezervacijeInsertRequest request);

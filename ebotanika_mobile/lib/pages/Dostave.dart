@@ -66,8 +66,7 @@ class _DostaveState extends State<Dostave> {
         ),
         SizedBox(
             height: 35,
-            child: Text(
-                DateFormat('dd.MM.yyyy').format(Dostava.datumSlanja).toString(),
+            child: Text(Dostava.datumSlanja,
                 style: const TextStyle(fontSize: 15, color: Colors.black))),
         const Text(
           'Datum i vrijeme preuzimanja',
@@ -78,10 +77,7 @@ class _DostaveState extends State<Dostave> {
         ),
         SizedBox(
           height: 35,
-          child: Text(
-              DateFormat('dd.MM.yyyy hh:mm')
-                  .format(Dostava.datumPreuzimanja)
-                  .toString(),
+          child: Text(Dostava.datumPreuzimanja,
               style: const TextStyle(fontSize: 15, color: Colors.black)),
         ),
         const Text(

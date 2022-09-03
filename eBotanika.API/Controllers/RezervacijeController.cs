@@ -39,6 +39,12 @@ namespace eBotanika.API.Controllers
             return _service.GetById(id);
         }
 
+        [HttpGet("korisnik/{korisnikid}")]
+        public List<Model.Rezervacije> GetByKorisnikId(int korisnikid)
+        {
+            return _service.GetByKorisnikId(korisnikid);
+        }
+
         [HttpDelete("{id}")]
         public Model.Rezervacije Delete(int id)
         {

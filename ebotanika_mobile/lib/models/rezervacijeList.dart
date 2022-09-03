@@ -1,6 +1,6 @@
 class RezervacijeList {
   final int rezervacijaID;
-  final DateTime datumRezervacije;
+  final String datumRezervacije;
   final int korisnikID;
   final int gradID;
   final String napomena;
@@ -23,7 +23,7 @@ class RezervacijeList {
   factory RezervacijeList.fromJson(Map<String, dynamic> json) {
     return RezervacijeList(
         rezervacijaID: json["rezervacijaID"],
-        datumRezervacije: DateTime.parse(json["datumRezervacije"].toString()),
+        datumRezervacije: json["datumRezervacije"],
         korisnikID: json["korisnikID"],
         gradID: json["gradID"],
         napomena: json["napomena"],
@@ -35,7 +35,7 @@ class RezervacijeList {
 
   Map<String, dynamic> toJson() => {
         "rezervacijaID": rezervacijaID,
-        "datumRezervacije": datumRezervacije.toIso8601String(),
+        "datumRezervacije": datumRezervacije,
         "korisnikID": korisnikID,
         "gradID": gradID,
         "napomena": napomena,

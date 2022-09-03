@@ -21,6 +21,12 @@ namespace eBotanika.API.Controllers
             return _service.Get(request);
         }
 
+        [HttpGet("korisnik/{korisnikid}")]
+        public List<Model.Ocjena> GetByKorisnikId(int korisnikid)
+        {
+            return _service.GetByKorisnikId(korisnikid);
+        }
+
         [HttpPost]
         public Model.Ocjena Insert(OcjenaInsertRequest request)
         {

@@ -14,7 +14,8 @@ class MojeRezervacije extends StatefulWidget {
 }
 
 class _MojeRezervacijeState extends State<MojeRezervacije> {
-  var rating = 0.0;
+  double? rating;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -65,10 +66,7 @@ class _MojeRezervacijeState extends State<MojeRezervacije> {
           ),
           SizedBox(
               height: 35,
-              child: Text(
-                  DateFormat('dd.MM.yyyy')
-                      .format(RezervacijeList.datumRezervacije)
-                      .toString(),
+              child: Text(RezervacijeList.datumRezervacije,
                   style: const TextStyle(
                       fontSize: 15,
                       color: Colors.black,
@@ -132,8 +130,8 @@ class _MojeRezervacijeState extends State<MojeRezervacije> {
                 style: const TextStyle(fontSize: 15, color: Colors.black)),
           ),
           RatingBar.builder(
-              initialRating: 1,
-              minRating: rating,
+              initialRating: 0,
+              minRating: 1,
               direction: Axis.horizontal,
               allowHalfRating: true,
               itemCount: 5,
@@ -143,38 +141,54 @@ class _MojeRezervacijeState extends State<MojeRezervacije> {
                     color: Colors.amber,
                   ),
               updateOnDrag: false,
-              onRatingUpdate: (rating) async {
+              onRatingUpdate: (value) async {
                 setState(() {
-                  this.rating = rating;
+                  rating = value;
                 });
                 var request = Ocjena(
-                    ocjenaUsluge: rating,
+                    ocjenaUsluge: value,
                     korisnikID: APIService.korisnikId,
                     biljkeID: RezervacijeList.biljkeID);
 
-                var result = await APIService.post(
-                    "Ocjena", json.encode(request.toJson()));
+                var result = await APIService.put("Ocjena",
+                    APIService.korisnikId, json.encode(request.toJson()));
 
                 if (result != null) {
-                  setState(() {
-                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                      content: SizedBox(
-                          height: 20,
-                          child: Center(
-                              child:
-                                  Text("Uspješno ste ocjenili rezervaciju."))),
-                      backgroundColor: Color.fromARGB(255, 9, 100, 13),
-                    ));
-                  });
+                  // ignore: use_build_context_synchronously
+                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                    content: SizedBox(
+                        height: 20,
+                        child: Center(
+                            child:
+                                Text("Uspješno ste ocijenili rezervaciju."))),
+                    backgroundColor: Color.fromARGB(255, 9, 100, 13),
+                  ));
                 }
               }),
+          const SizedBox(height: 25),
+          Container(
+            width: 40,
+            height: 30,
+            decoration: const BoxDecoration(
+                color: Colors.green, shape: BoxShape.circle),
+            alignment: Alignment.center,
+            child: Text(
+              rating == null ? "0" : rating.toString(),
+              style: const TextStyle(color: Colors.white, fontSize: 20),
+            ),
+          ),
+          const Text(
+            "Ocjena",
+            style: TextStyle(color: Colors.black, fontSize: 20),
+          ),
         ],
       ),
     ))));
   }
 
   Future<List<RezervacijeList>> getRezervacije() async {
-    var rez = await APIService.getById('Rezervacije', APIService.korisnikId);
+    var rez = await APIService.getById('Rezervacije/korisnik', APIService.korisnikId);
+
     return rez!.map((i) => RezervacijeList.fromJson(i)).toList();
   }
 }

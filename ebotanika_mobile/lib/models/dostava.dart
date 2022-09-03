@@ -1,7 +1,7 @@
 class Dostava {
   int dostavaID;
-  DateTime datumSlanja;
-  DateTime datumPreuzimanja;
+  String datumSlanja;
+  String datumPreuzimanja;
   String trenutnaLokacija;
   String napomena;
   int rezervacijaID;
@@ -18,8 +18,8 @@ class Dostava {
   factory Dostava.fromJson(Map<String, dynamic> json) {
     return Dostava(
         dostavaID: json["dostavaID"],
-        datumSlanja: DateTime.parse(json["datumSlanja"].toString()),
-        datumPreuzimanja: DateTime.parse(json["datumPreuzimanja"].toString()),
+        datumSlanja: json["datumSlanja"],
+        datumPreuzimanja: json["datumPreuzimanja"],
         trenutnaLokacija: json["trenutnaLokacija"],
         napomena: json["napomena"],
         rezervacijaID: json["rezervacijaID"]);
@@ -27,8 +27,8 @@ class Dostava {
 
   Map<String, dynamic> toJson() => {
         "dostavaID": dostavaID,
-        "datumSlanja": datumSlanja.toIso8601String(),
-        "datumPreuzimanja": datumPreuzimanja.toIso8601String(),
+        "datumSlanja": datumSlanja,
+        "datumPreuzimanja": datumPreuzimanja,
         "trenutnaLokacija": trenutnaLokacija,
         "napomena": napomena,
         "rezervacijaID": rezervacijaID
